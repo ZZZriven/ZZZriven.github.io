@@ -3,7 +3,7 @@
 - 个人主页：https://zzzriven.github.io/
 - RSI 观察站：https://zzzriven.github.io/rsi/
 
-个人主页保留简洁空壳，个人资料待填写。RSI 观察站提供黑色默认主题、可选浅色阅读模式、中文论文速读、搜索、四类研究方向、日期排序及随机阅读。
+个人主页保留简洁空壳，个人资料待填写。RSI 观察站提供灰色默认主题、可选浅色阅读模式、中文论文速读、搜索、四类研究方向、日期排序及随机阅读。
 
 ## 更新论文
 
@@ -25,7 +25,7 @@
 
 - app/page.tsx：个人主页空壳及 RSI 入口。
 - lib/site.ts：RSI 观察站的维护者姓名与联系邮箱。
-- app/globals.css：黑色主题、浅色阅读模式、响应式布局。
+- app/globals.css：灰色主题、浅色阅读模式、响应式布局。
 - components/rsi/library.tsx：论文检索与列表。
 - app/rsi/papers/[id]/page.tsx：文章详情及静态页面生成。
 - app/rsi/layout.tsx：RSI 站标题、简介和作者信息。
