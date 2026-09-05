@@ -1,29 +1,19 @@
 'use client';
-import { useEffect, useState } from 'react';
-import { ArrowUpRight, Layers2, Moon, Sun, X } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
+import { useState } from 'react';
+import { ArrowUpRight, Layers2, X } from 'lucide-react';
+import { EvolutionBackground } from '@/components/rsi/evolution-background';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
 import { siteOwner } from '@/lib/site';
 import { papers } from '@/lib/papers';
 
 export function SiteFrame({children}: {children: React.ReactNode}) {
-  const [dark, setDark] = useState(false);
   const [about, setAbout] = useState(false);
-  useEffect(() => {
-    try { setDark(localStorage.getItem('rsi-reading-theme') === 'dark'); } catch {}
-    return () => document.documentElement.classList.remove('rsi-dark');
-  }, []);
-  useEffect(() => { document.documentElement.classList.toggle('rsi-dark', dark); }, [dark]);
-  function toggleDark(value: boolean) {
-    setDark(value);
-    try { localStorage.setItem('rsi-reading-theme', value ? 'dark' : 'light'); } catch {}
-  }
   return <div className="rsi-site">
+    <EvolutionBackground/>
     <a className="skip-link" href="#main">跳到正文</a>
     <header className="rsi-header">
       <a className="rsi-brand" href="/rsi/" aria-label="RSI 观察站首页"><Layers2 size={25} strokeWidth={1.5}/><span><strong>RSI<span className="brand-divider">/</span>观察站</strong><small>RECURSIVE SELF-IMPROVEMENT</small></span></a>
-      <nav className="rsi-nav" aria-label="站点导航"><a href="/rsi/#papers">论文库</a><button onClick={() => setAbout(true)}>关于 RSI</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
-      <span className="rsi-theme"><Sun size={15}/><Switch checked={dark} onCheckedChange={toggleDark} aria-label="深色阅读模式"/><Moon size={15}/></span>
+      <nav className="rsi-nav" aria-label="站点导航"><button onClick={() => setAbout(true)}>关于 RSI</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
     </header>
     {children}
     <footer className="rsi-footer"><div><span className="footer-wordmark">RSI / OBSERVATORY</span><p>记录改进，也记录边界。</p></div><div className="rsi-credit"><span>由 <a href="https://github.com/ZZZriven">{siteOwner.name}</a> 创建与维护</span><a href={'mailto:' + siteOwner.email}>{siteOwner.email}</a><a href="https://github.com/ZZZriven/ZZZriven.github.io">网站源码 <ArrowUpRight size={13}/></a></div></footer>

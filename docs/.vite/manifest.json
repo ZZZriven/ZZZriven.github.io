@@ -14,8 +14,8 @@
       "_rolldown-runtime-C60lm6uB.js"
     ]
   },
-  "_papers-IaoRwB4k.js": {
-    "file": "_next/static/chunks/papers-IaoRwB4k.js",
+  "_papers-GKPbFJSW.js": {
+    "file": "_next/static/chunks/papers-GKPbFJSW.js",
     "name": "papers",
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
@@ -28,29 +28,29 @@
     "name": "rolldown-runtime"
   },
   "components/rsi/library.tsx": {
-    "file": "_next/static/chunks/library-9nDcMA4Q.js",
+    "file": "_next/static/chunks/library--DueMb9X.js",
     "name": "library",
     "src": "components/rsi/library.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_papers-IaoRwB4k.js",
+      "_papers-GKPbFJSW.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "components/rsi/site-frame.tsx": {
-    "file": "_next/static/chunks/site-frame-D8jBticm.js",
+    "file": "_next/static/chunks/site-frame-Cid46ICx.js",
     "name": "site-frame",
     "src": "components/rsi/site-frame.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_papers-IaoRwB4k.js",
+      "_papers-GKPbFJSW.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
-    "file": "_next/static/chunks/app-route-prefetch-policy-CcFcmePW.js",
+    "file": "_next/static/chunks/app-route-prefetch-policy-CpAp-91E.js",
     "name": "app-route-prefetch-policy",
     "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
     "isDynamicEntry": true,
@@ -59,7 +59,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-CUJHUYTY.js",
+    "file": "_next/static/chunks/layout-segment-context-Xdg3rggf.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -80,7 +80,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-Bxmi4cIA.js",
+    "file": "_next/static/chunks/index-Dxk-lKRP.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
