@@ -1,2 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>https://zzzriven.github.io/</loc></url></urlset>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://zzzriven.github.io/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2601.22513/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2505.22954/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2505.03335/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2504.15228/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2401.10020/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2310.02304/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2305.16291/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2303.17651/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2303.11366/</loc></url>
+  <url><loc>https://zzzriven.github.io/rsi/papers/2203.14465/</loc></url>
+</urlset>
