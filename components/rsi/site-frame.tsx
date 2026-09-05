@@ -7,23 +7,23 @@ import { siteOwner } from '@/lib/site';
 import { papers } from '@/lib/papers';
 
 export function SiteFrame({children}: {children: React.ReactNode}) {
-  const [light, setLight] = useState(false);
+  const [dark, setDark] = useState(false);
   const [about, setAbout] = useState(false);
   useEffect(() => {
-    try { setLight(localStorage.getItem('rsi-reading-theme') === 'light'); } catch {}
-    return () => document.documentElement.classList.remove('rsi-light');
+    try { setDark(localStorage.getItem('rsi-reading-theme') === 'dark'); } catch {}
+    return () => document.documentElement.classList.remove('rsi-dark');
   }, []);
-  useEffect(() => { document.documentElement.classList.toggle('rsi-light', light); }, [light]);
-  function toggleLight(value: boolean) {
-    setLight(value);
-    try { localStorage.setItem('rsi-reading-theme', value ? 'light' : 'dark'); } catch {}
+  useEffect(() => { document.documentElement.classList.toggle('rsi-dark', dark); }, [dark]);
+  function toggleDark(value: boolean) {
+    setDark(value);
+    try { localStorage.setItem('rsi-reading-theme', value ? 'dark' : 'light'); } catch {}
   }
   return <div className="rsi-site">
     <a className="skip-link" href="#main">跳到正文</a>
     <header className="rsi-header">
-      <a className="rsi-brand" href="/rsi/" aria-label="RSI 观察站首页"><Layers2 size={25} strokeWidth={1.5}/><span><strong>RSI<span className="brand-divider">/</span>观察站</strong><small>RESEARCH OBSERVATORY</small></span></a>
-      <nav className="rsi-nav" aria-label="站点导航"><a href="/rsi/">论文库</a><button onClick={() => setAbout(true)}>关于</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
-      <span className="rsi-theme"><Moon size={15}/><Switch checked={light} onCheckedChange={toggleLight} aria-label="浅色阅读模式"/><Sun size={15}/></span>
+      <a className="rsi-brand" href="/rsi/" aria-label="RSI 观察站首页"><Layers2 size={25} strokeWidth={1.5}/><span><strong>RSI<span className="brand-divider">/</span>观察站</strong><small>RECURSIVE SELF-IMPROVEMENT</small></span></a>
+      <nav className="rsi-nav" aria-label="站点导航"><a href="/rsi/#papers">论文库</a><button onClick={() => setAbout(true)}>关于 RSI</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
+      <span className="rsi-theme"><Sun size={15}/><Switch checked={dark} onCheckedChange={toggleDark} aria-label="深色阅读模式"/><Moon size={15}/></span>
     </header>
     {children}
     <footer className="rsi-footer"><div><span className="footer-wordmark">RSI / OBSERVATORY</span><p>记录改进，也记录边界。</p></div><div className="rsi-credit"><span>由 <a href="https://github.com/ZZZriven">{siteOwner.name}</a> 创建与维护</span><a href={'mailto:' + siteOwner.email}>{siteOwner.email}</a><a href="https://github.com/ZZZriven/ZZZriven.github.io">网站源码 <ArrowUpRight size={13}/></a></div></footer>

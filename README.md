@@ -3,7 +3,7 @@
 - 个人主页：https://zzzriven.github.io/
 - RSI 观察站：https://zzzriven.github.io/rsi/
 
-个人主页保留简洁空壳，个人资料待填写。RSI 观察站提供灰色默认主题、可选浅色阅读模式、中文论文速读、搜索、四类研究方向、日期排序及随机阅读。
+个人主页保留简洁空壳，个人资料待填写。RSI 观察站提供午夜蓝与琥珀金的进化首屏、纸白阅读区、可选深色阅读模式、中文论文速读、搜索、四类研究方向、日期排序及随机阅读。
 
 ## 更新论文
 
@@ -25,8 +25,9 @@
 
 - app/page.tsx：个人主页空壳及 RSI 入口。
 - lib/site.ts：RSI 观察站的维护者姓名与联系邮箱。
-- app/globals.css：灰色主题、浅色阅读模式、响应式布局。
+- app/globals.css：全站色彩、阅读主题、响应式布局。
 - components/rsi/library.tsx：论文检索与列表。
+- components/rsi/evolution-hero.tsx：视频背景、研究方向入口、概念流程和动效控制。
 - app/rsi/papers/[id]/page.tsx：文章详情及静态页面生成。
 - app/rsi/layout.tsx：RSI 站标题、简介和作者信息。
 
@@ -63,3 +64,18 @@ GitHub Pages 从 main 分支的 /docs 目录发布。构建后必须将生成的
 ## 技术
 
 React + Vinext 静态导出，使用 GitHub Pages 托管。无数据库、登录系统或访问统计。深浅主题偏好仅保存在浏览器本地。
+
+## 进化首屏与素材
+
+视频来自用户提供的设计参考，用作进化的视觉隐喻。它不代表本站运行了 AI 训练或真实的改进过程。
+
+参考视频：
+https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_044635_8daabe05-1a5c-491c-920f-4b0bd8f04812.mp4
+
+- public/media/evolution-loop.mp4：8 秒静音 H.264 视频，720p，约 1.8 MB。
+- public/media/evolution-poster.jpg：同一素材的静态封面。
+- public/fonts/：本地托管的 Inter 拉丁字体与 OFL 许可；中文使用系统字体回退。
+
+视频仅在桌面宽度、不要求减少动态效果且未开启节省流量时加载；离开视口或切换到后台会暂停。播放失败保留静态封面。四张研究方向卡片会清除搜索词、选择相应分类并定位到论文库，数量直接由论文数据计算。
+
+默认阅读区为纸白色；顶部开关切换到深色阅读模式。个人主页仍保留空壳。

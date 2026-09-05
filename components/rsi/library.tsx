@@ -5,7 +5,8 @@ import { ArrowUpRight, Search, Shuffle, X } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Empty, EmptyTitle, EmptyDescription } from '@/components/ui/empty';
-import { categories, papers, filterPapers, formatDate, collectionUpdated } from '@/lib/papers';
+import { EvolutionHero } from '@/components/rsi/evolution-hero';
+import { categories, papers, filterPapers, formatDate } from '@/lib/papers';
 
 const sorts = [{value: 'newest', label: '首次提交 · 最新优先'}, {value: 'oldest', label: '首次提交 · 最早优先'}, {value: 'updated', label: '修订日期 · 最新优先'}];
 const descriptions: Record<string, string> = {
@@ -48,13 +49,19 @@ export function Library() {
     try { Promise.resolve(context.registerTool(tool, {signal: lifecycle.signal})).catch(() => {}); } catch {}
     return () => lifecycle.abort();
   }, []);
+  function selectDirection(value: string) {
+    setQuery(''); setCategory(value);
+    const collection = document.getElementById('papers');
+    collection?.focus({preventScroll: true});
+    collection?.scrollIntoView({behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start'});
+  }
   function reset() {setQuery(''); setCategory('全部论文'); setSort('newest');}
   function randomPaper() {if (filtered.length) window.location.assign('/rsi/papers/' + filtered[Math.floor(Math.random() * filtered.length)].id + '/');}
 
   return <main id="main" className="rsi-main">
-    <section className="rsi-intro"><div><p className="overline">RECURSIVE SELF-IMPROVEMENT</p><h1>追踪智能的<span>自我进化。</span></h1><p className="hero-description">精选论文、中文速读与研究边界。<br className="mobile-break"/>理解系统如何改进自身。</p></div><dl className="collection-stats"><div><dd>{String(papers.length).padStart(2, '0')}</dd><dt>精选论文</dt></div><div><dd>04</dd><dt>研究方向</dt></div><div className="collection-date"><dt>最近整理</dt><dd>{formatDate(collectionUpdated)}</dd></div></dl></section>
+    <EvolutionHero onSelect={selectDirection}/>
 
-    <section className="rsi-library" aria-labelledby="library-title"><div className="library-heading"><div><span className="overline">THE READING INDEX</span><h2 id="library-title">论文库<span className="heading-slash">/</span><span className="library-total">{papers.length}</span></h2></div><div className="library-tools"><div className="rsi-search"><Search size={18}/><input type="search" aria-label="搜索论文、作者或关键词" placeholder="搜索论文、作者或关键词" value={query} maxLength={300} onChange={e => setQuery(e.target.value)}/>{query && <button aria-label="清空搜索" onClick={() => setQuery('')}><X size={16}/></button>}</div><button className="random-button" onClick={randomPaper} disabled={!filtered.length}><Shuffle size={17}/><span>随机一篇</span></button></div></div>
+    <section id="papers" className="rsi-library" aria-labelledby="library-title" tabIndex={-1}><div className="library-heading"><div><span className="overline">THE READING INDEX</span><h2 id="library-title">论文库<span className="heading-slash">/</span><span className="library-total">{papers.length}</span></h2></div><div className="library-tools"><div className="rsi-search"><Search size={18}/><input type="search" aria-label="搜索论文、作者或关键词" placeholder="搜索论文、作者或关键词" value={query} maxLength={300} onChange={e => setQuery(e.target.value)}/>{query && <button aria-label="清空搜索" onClick={() => setQuery('')}><X size={16}/></button>}</div><button className="random-button" onClick={randomPaper} disabled={!filtered.length}><Shuffle size={17}/><span>随机一篇</span></button></div></div>
       <Tabs value={category} onValueChange={value => setCategory(String(value))} className="rsi-tabs"><div className="tab-scroll"><TabsList variant="line" className="rsi-tab-list" aria-label="按研究方向筛选">{categories.map(c => <TabsTrigger value={c} key={c} className="rsi-tab">{c}<span>{c === '全部论文' ? papers.length : papers.filter(p => p.category === c).length}</span></TabsTrigger>)}</TabsList></div>
         <div className="library-description"><p>{descriptions[category]}</p><Select value={sort} onValueChange={v => setSort(v ?? 'newest')} items={sorts}><SelectTrigger className="rsi-sort" aria-label="论文排序"><SelectValue/></SelectTrigger><SelectContent className="rsi-select" align="end">{sorts.map(s => <SelectItem key={s.value} value={s.value}>{s.label}</SelectItem>)}</SelectContent></Select></div>
         <p className="rsi-result-count" role="status" aria-live="polite">{query ? '搜索结果' : '正在浏览'} <strong>{filtered.length}</strong> 篇{query && <button onClick={reset}>重置筛选 <X size={12}/></button>}</p>
