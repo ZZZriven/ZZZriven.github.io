@@ -7,6 +7,8 @@ for (const path of paths) await access(sourceFor(path));
 await rm('docs', { recursive: true, force: true });
 await mkdir('docs', { recursive: true });
 await cp('dist/client', 'docs', { recursive: true });
+// Vinext generates its own 404 after copying public assets. Keep our Pages fallback.
+await cp('public/404.html', 'docs/404.html');
 for (const path of paths) {
   if (path === '/') continue;
   await mkdir('docs' + path, { recursive: true });
