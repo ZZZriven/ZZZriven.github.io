@@ -2,6 +2,9 @@
 
 - 个人主页：https://zzzriven.github.io/
 - RSI 观察站：https://zzzriven.github.io/rsi/
+- 慢慢骑 · 鹈鹕的海岸骑行：https://zzzriven.github.io/pelican-cycling.html
+
+鹈鹕骑行页面的原始文件位于 `public/pelican-cycling.html`，构建时自动复制到 `docs/` 发布，主页提供访问入口。该页面包含完整的 SVG 动画、播放控制、速度调节和车铃音效，无需外部资源。
 
 个人主页保留简洁空壳，个人资料待填写。RSI 观察站采用全屏粒子螺旋背景和统一深色界面，首页直接呈现连续论文列表，提供中文论文速读、搜索、日期排序及随机阅读。不设置明暗模式开关或研究分类入口。
 
