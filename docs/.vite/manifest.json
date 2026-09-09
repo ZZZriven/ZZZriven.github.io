@@ -7,6 +7,15 @@
       "_framework-D_rUT4EX.js"
     ]
   },
+  "_createLucideIcon-BrNKFXBt.js": {
+    "file": "_next/static/chunks/createLucideIcon-BrNKFXBt.js",
+    "name": "createLucideIcon",
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_Icon-D0zGVybZ.js",
+      "_framework-D_rUT4EX.js"
+    ]
+  },
   "_framework-D_rUT4EX.js": {
     "file": "_next/static/chunks/framework-D_rUT4EX.js",
     "name": "framework",
@@ -14,43 +23,64 @@
       "_rolldown-runtime-C60lm6uB.js"
     ]
   },
-  "_papers-GKPbFJSW.js": {
-    "file": "_next/static/chunks/papers-GKPbFJSW.js",
+  "_papers-CmpXCgc6.js": {
+    "file": "_next/static/chunks/papers-CmpXCgc6.js",
     "name": "papers",
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_Icon-D0zGVybZ.js",
+      "_createLucideIcon-BrNKFXBt.js",
       "_framework-D_rUT4EX.js"
+    ]
+  },
+  "_play-oi1-UoHe.js": {
+    "file": "_next/static/chunks/play-oi1-UoHe.js",
+    "name": "play",
+    "imports": [
+      "_createLucideIcon-BrNKFXBt.js"
     ]
   },
   "_rolldown-runtime-C60lm6uB.js": {
     "file": "_next/static/chunks/rolldown-runtime-C60lm6uB.js",
     "name": "rolldown-runtime"
   },
+  "components/pelican-background.tsx": {
+    "file": "_next/static/chunks/pelican-background-yKQEeLr6.js",
+    "name": "pelican-background",
+    "src": "components/pelican-background.tsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "_rolldown-runtime-C60lm6uB.js",
+      "_play-oi1-UoHe.js",
+      "_framework-D_rUT4EX.js"
+    ]
+  },
   "components/rsi/library.tsx": {
-    "file": "_next/static/chunks/library--DueMb9X.js",
+    "file": "_next/static/chunks/library-DarA6k-D.js",
     "name": "library",
     "src": "components/rsi/library.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_papers-GKPbFJSW.js",
+      "_papers-CmpXCgc6.js",
+      "_createLucideIcon-BrNKFXBt.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "components/rsi/site-frame.tsx": {
-    "file": "_next/static/chunks/site-frame-Cid46ICx.js",
+    "file": "_next/static/chunks/site-frame-DZM_nJGC.js",
     "name": "site-frame",
     "src": "components/rsi/site-frame.tsx",
     "isDynamicEntry": true,
     "imports": [
       "_rolldown-runtime-C60lm6uB.js",
-      "_papers-GKPbFJSW.js",
+      "_papers-CmpXCgc6.js",
+      "_createLucideIcon-BrNKFXBt.js",
+      "_play-oi1-UoHe.js",
       "_framework-D_rUT4EX.js"
     ]
   },
   "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js": {
-    "file": "_next/static/chunks/app-route-prefetch-policy-rqU0Ply0.js",
+    "file": "_next/static/chunks/app-route-prefetch-policy-B8ntLciP.js",
     "name": "app-route-prefetch-policy",
     "src": "node_modules/vinext/dist/shims/internal/app-route-prefetch-policy.js",
     "isDynamicEntry": true,
@@ -59,7 +89,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/layout-segment-context.js": {
-    "file": "_next/static/chunks/layout-segment-context-B-iCKijx.js",
+    "file": "_next/static/chunks/layout-segment-context-DPRdnDNE.js",
     "name": "layout-segment-context",
     "src": "node_modules/vinext/dist/shims/layout-segment-context.js",
     "isDynamicEntry": true,
@@ -70,7 +100,7 @@
     ]
   },
   "node_modules/vinext/dist/shims/streamed-icons.js": {
-    "file": "_next/static/chunks/streamed-icons-B7zI55ff.js",
+    "file": "_next/static/chunks/streamed-icons-D0Q1wsQE.js",
     "name": "streamed-icons",
     "src": "node_modules/vinext/dist/shims/streamed-icons.js",
     "isDynamicEntry": true,
@@ -80,7 +110,7 @@
     ]
   },
   "virtual:vinext-app-browser-entry": {
-    "file": "_next/static/chunks/index-G1OGybmu.js",
+    "file": "_next/static/chunks/index-D_H5lrfB.js",
     "name": "index",
     "src": "virtual:vinext-app-browser-entry",
     "isEntry": true,
@@ -94,6 +124,7 @@
       "node_modules/vinext/dist/shims/layout-segment-context.js",
       "components/rsi/site-frame.tsx",
       "_Icon-D0zGVybZ.js",
+      "components/pelican-background.tsx",
       "node_modules/vinext/dist/shims/streamed-icons.js",
       "components/rsi/library.tsx"
     ]

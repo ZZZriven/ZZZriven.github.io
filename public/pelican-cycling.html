@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#f7f4eb">
   <title>慢慢骑 · 鹈鹕的海岸骑行</title>
+  <script>
+    if (new URLSearchParams(window.location.search).get('background') === '1') {
+      document.documentElement.classList.add('background-mode');
+    }
+  </script>
   <style>
     :root { color-scheme: light; --paper:#f7f4eb; --ink:#29443e; --muted:#697971; --line:#dcded1; --accent:#dc6845; }
     * { box-sizing:border-box; }
@@ -56,6 +61,19 @@
       .toast { top:45%; left:65%; font-size:18px; }
     }
     @media (prefers-reduced-motion:reduce) { .toast.ringing { animation:none; } button { transition:none; } }
+    /* Reuse the original illustration as the personal homepage background. */
+    .background-mode, .background-mode body { width:100%; height:100%; min-height:0; overflow:hidden; background:#faf5e8; }
+    .background-mode body { display:block; padding:0; }
+    .background-mode main, .background-mode .postcard, .background-mode .scene { width:100%; height:100%; }
+    .background-mode .postcard { border:0; border-radius:0; box-shadow:none; }
+    .background-mode .scene { padding:0; }
+    .background-mode .masthead, .background-mode .intro, .background-mode .weather,
+    .background-mode .controls, .background-mode footer, .background-mode .toast,
+    .background-mode noscript { display:none; }
+    .background-mode .scene > svg { position:absolute; inset:0; width:100%; height:100%; max-width:none; margin:0; }
+    @media (max-width:900px) and (orientation:portrait) {
+      .background-mode .scene > svg { top:auto; bottom:0; height:min(60%, 122vw); }
+    }
   </style>
 </head>
 <body>
@@ -183,6 +201,8 @@
   const $ = id => document.getElementById(id);
   const ns = 'http://www.w3.org/2000/svg';
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const backgroundMode = document.documentElement.classList.contains('background-mode');
+  if (backgroundMode) $('landscape').setAttribute('preserveAspectRatio', 'xMidYMid slice');
   let paused = reducedMotion.matches;
   let speed = 1;
   let elapsed = 0;
@@ -262,9 +282,22 @@
     $('play').setAttribute('aria-pressed',String(paused));
     $('play-icon').setAttribute('d',paused?'M6 3 17 10 6 17Z':'M5 3h3v14H5zM12 3h3v14h-3z');
     $('ride-status').textContent=paused?'停下来，看海':'正在兜风';
+    if (backgroundMode && window.parent !== window) {
+      window.parent.postMessage({type:'pelican-playback', paused}, window.location.origin);
+    }
   }
   function togglePlayback() { paused=!paused; syncPlayback(); }
   $('play').addEventListener('click',togglePlayback);
+  if (backgroundMode) {
+    window.addEventListener('message', event => {
+      if (event.origin !== window.location.origin || event.source !== window.parent) return;
+      if (event.data?.type === 'pelican-playback-request') syncPlayback();
+      if (event.data?.type === 'pelican-set-paused' && typeof event.data.paused === 'boolean') {
+        paused = event.data.paused;
+        syncPlayback();
+      }
+    });
+  }
   $('speed').addEventListener('input',event => {
     speed=Number(event.target.value);
     $('speed-output').textContent=`${speed.toFixed(2)}×`;
