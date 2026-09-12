@@ -1,85 +1,64 @@
-# 个人主页与 RSI 观察站
+# 个人主页与 RSI 研究库
 
 - 个人主页：https://zzzriven.github.io/
-- RSI 观察站：https://zzzriven.github.io/rsi/
-- 慢慢骑 · 鹈鹕的海岸骑行：https://zzzriven.github.io/pelican-cycling.html
+- RSI 研究库：https://zzzriven.github.io/rsi/
+- 鹈鹕骑行：https://zzzriven.github.io/pelican-cycling.html
 
-鹈鹕骑行页面的原始文件位于 `public/pelican-cycling.html`，构建时自动复制到 `docs/` 发布，主页通过 `?background=1` 复用同一份 SVG 为全屏背景，同时提供独立页面入口。该页面包含完整的 SVG 动画、播放控制、速度调节和车铃音效，无需外部资源。
+RSI 研究库使用暖白、墨绿和低饱和青绿配色，收录 22 篇结构化中文论文解析。页面支持全文检索、七方向分类、RSI 关联类型、日期排序和筛选范围内的随机阅读。查询参数保留筛选条件，可复制当前网址分享。
 
-个人主页使用米白与海绿配色的鹈鹕骑行动态背景，个人资料待填写。背景无声音，可手动暂停；系统要求减少动态效果时默认静止，手机使用独立构图。RSI 观察站采用全屏粒子螺旋背景和统一深色界面，首页直接呈现连续论文列表，提供中文论文速读、搜索、日期排序及随机阅读。不设置明暗模式开关或研究分类入口。
+## 分类与来源
 
-## 更新论文
+主分类：输出修订、记忆与技能、模型与奖励、智能体与代码、搜索与科研、评测与边界、综述与框架。每篇按主要研究对象归档，关键词补充交叉机制。
 
-编辑 content/papers.json。每篇包含：
+关联类型独立标注为 refinement（单次输出修订）、persistent（持久自我改进）、recursive（递归机制探索）或 foundation（基础与评测）。它是综合 Awesome RSI 和相关综述的编辑分类，不是统一的学术分级；recursive 不意味着已实现无界或完整 RSI。持久改进可限于后续尝试，跨任务迁移以逐篇证据为准。
 
-- id：arXiv 编号，同时作为文章网址，必须唯一。
-- title / en / authors：中文标题、英文原题、作者。
-- date / updated / version：首次提交日期、核对过的修订日期与版本。没有核对的修订信息保留 null。
-- category：原有分类元数据保留在数据文件中，当前页面和搜索工具不提供分类筛选，也不展示分类标签。
-- keywords / level：检索关键词、具体改进对象。
-- summary / problem / method / result：摘要速读、问题、方法与论文报告的结果。
-- boundary / relation：本站阅读提醒与 RSI 关联判断。
+`content/resources.json` 保存分类方法与相关论文库的原始链接。`content/papers.json` 每篇包含：
 
-结果数字应在原始来源核实。自反馈、答案修订与完整递归自我改进不能混为一谈。当前为人工维护的精选起始库，未启用自动抓取。
+- `id / title / en / authors`：arXiv ID、中文标题、原题、作者。
+- `date / updated / version`：首次提交和已核实版本。未核实修订信息为 null；“修订排序”对 null 回退首次日期。
+- `category / mode / level / keywords`：主分类、关联类型、改进对象、关键词。
+- `summary / problem / insight / observation / method / result / boundary / relation / outlook`：摘要、Research problem、Insight、Observation、Method、结果、局限、RSI 关联与展望。
+- `feedback / evidence`：反馈来源与证据边界。
+- `reviewedAt / sources`：整理日期和实际阅读来源。每个来源的 `basis` 写明摘要、正文相关章节或官方项目核验范围。
 
-修改 lib/papers.ts 中的 collectionUpdated 为实际整理日期。
+洞察、局限分析、关联分类和未来展望包含编辑判断，页面明确标注。不要把局部实验分数或输出自反馈写成完整 RSI 证据；数据集子集、成本和迁移范围应具体说明。当前为人工维护的精选论文库，不是实时全量索引。
 
-## 修改个人主页、署名或外观
+## 编辑入口
 
-- app/page.tsx：个人主页内容及 RSI 入口。
-- components/pelican-background.tsx：主页背景与播放控制。
-- lib/site.ts：RSI 观察站的维护者姓名与联系邮箱。
-- app/globals.css：全站统一色彩、全屏背景和响应式布局。
-- components/rsi/library.tsx：论文检索与列表。
-- components/rsi/evolution-background.tsx：全屏视频背景、静态封面和动效控制。
-- app/rsi/papers/[id]/page.tsx：文章详情及静态页面生成。
-- app/rsi/layout.tsx：RSI 站标题、简介和作者信息。
+- `components/rsi/library.tsx`：检索、分类导航、方法论和资源展示。
+- `lib/papers.ts`：数据类型、分类说明和组合筛选。
+- `app/rsi/papers/[id]/page.tsx`：论文详情和静态路由。
+- `app/rsi/rsi.css`：RSI 界面配色及响应式布局。
+- `app/globals.css`：公共基础与个人主页样式。
+- `components/rsi/site-frame.tsx`：导航、页脚、关于弹窗。
+- `lib/site.ts`：维护者联系信息。
 
-## 本地预览与发布
+更新论文后同步 `lib/papers.ts` 的实际整理日期。新增论文自动加入详情页导出与 sitemap。原有十篇 ID 和网址保持可用。
 
-需要 Node.js 22.13 或以上版本。
+## 预览与发布
 
-~~~sh
+需要 Node.js 22.13 或以上。
+
+```sh
 npm ci
 npm run dev
-~~~
-
-打开开发服务器输出地址下的 /rsi/。
-
-更新并发布：
-
-~~~sh
+npx tsc --noEmit
+npm run lint
 npm run build:pages
-git add app components content lib public scripts docs
-git commit -m "Update RSI observatory"
-git push
-~~~
+```
 
-GitHub Pages 从 main 分支的 /docs 目录发布。构建后必须将生成的 docs 一起提交，包含所有论文详情页及静态资源。docs/.nojekyll 必须保留。
+GitHub Pages 从 main 的 `/docs` 发布。构建会校验所有预期路由，再更新 docs 并保留 `.nojekyll`。提交源码及构建产物后推送 main 即可发布。生产页面可通过独立网址打开或刷新，无需后端。
 
-静态首页、论文库和每个详情页均可通过独立网址打开或刷新，不需要服务器。新增论文时会生成对应页面和网站地图。
+验证应覆盖所有论文静态路由、资源链接、桌面/手机排版、分类与关联类型组合、全文检索、无结果重置和 URL 恢复。WebMCP `search_papers` 保留为可选增强，不影响普通浏览器手动使用。
 
-## 验证
+## 个人主页与素材
 
-发布前执行生产构建和 TypeScript 检查，并检查所有静态路由、资源、论文日期排序及搜索行为。主页背景已通过桌面、手机和平板浏览器预览，检查了暂停/继续播放、主页项目入口及独立骑行页面。
+个人主页继续使用鹈鹕海岸骑行动画，其源文件为 `public/pelican-cycling.html`。首页通过 `?background=1` 复用，保留暂停、减少动态效果和独立页面入口。RSI 阅读页面不加载背景视频。
 
-搜索功能保留可选的 WebMCP 接口，普通浏览器不支持时不影响手动操作。当前环境未提供可用于本轮验证的 WebMCP 上下文，因此不宣称该接口已在本轮浏览器中验证。
+`public/fonts/` 为本地 Inter 拉丁字体及 OFL 许可；中文使用系统字体。旧版背景素材保留于 `public/media/`，不参与 RSI 新界面展示。
 
-## 技术
+### 本次验证记录（2026-09-12）
 
-React + Vinext 静态导出，使用 GitHub Pages 托管。无数据库、登录系统或访问统计。界面不读取或保存明暗主题偏好。
+生产静态导出、TypeScript 和本次修改文件的 oxlint 检查通过。浏览器验证覆盖 22 个详情路由、检索/分类/关联交集、URL 刷新恢复、排序、随机阅读、空状态、关于弹窗，以及 320/390/768/1440 像素布局，无运行时错误或本地资源失败。
 
-## 全屏背景与素材
-
-视频来自用户提供的设计参考，用作进化的视觉隐喻。它不代表本站运行了 AI 训练或真实的改进过程。
-
-参考视频：
-https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260622_044635_8daabe05-1a5c-491c-920f-4b0bd8f04812.mp4
-
-- public/media/evolution-loop.mp4：8 秒静音 H.264 视频，720p，约 1.8 MB。
-- public/media/evolution-poster.jpg：同一素材的静态封面。
-- public/fonts/：本地托管的 Inter 拉丁字体与 OFL 许可；中文使用系统字体回退。
-
-粒子螺旋以固定背景铺满整个视口，滚动时持续可见。视频仅在桌面宽度、不要求减少动态效果且未开启节省流量时加载；切换到后台会暂停，右下角可手动暂停。手机和减少动态效果模式使用全屏静态封面，播放失败也保留封面。
-
-首页和论文详情页使用一致的深色阅读样式。首页没有独立宣传首屏、论文库分区或分类导航，搜索后直接展示匹配论文。个人主页保留待填写的个人资料，并使用鹈鹕骑行背景。
+全仓 `npm run lint` 仍报告 20 个既有问题，位于通用 `components/ui/`、`hooks/use-mobile.ts` 与未使用的旧版背景组件；没有把这些组件纳入本次内容及界面修改。生成的 `docs/` 已从源码 lint 中排除。

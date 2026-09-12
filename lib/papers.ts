@@ -1,11 +1,40 @@
 import data from '@/content/papers.json';
-export const papers = data;
-export type Paper = typeof papers[number];
-export const categories = ['全部论文', '智能体进化', '自博弈与课程', '自训练与反馈', '理论与边界'] as const;
+export const categories = ['全部论文', '输出修订', '记忆与技能', '模型与奖励', '智能体与代码', '搜索与科研', '评测与边界', '综述与框架'] as const;
+export const categoryDescriptions: Record<string, string> = {
+  '全部论文': '从单次自反馈到改进机制的递归演化，按研究对象浏览。',
+  '输出修订': '通过反馈与反思改写当前答案，关注推理阶段的改进。',
+  '记忆与技能': '将经验积累为可在后续任务中调用的记忆、技能与上下文。',
+  '模型与奖励': '通过自训练、自博弈和自奖励，更新模型参数与学习信号。',
+  '智能体与代码': '优化提示词、工作流、工具和智能体实现，包含自修改代码。',
+  '搜索与科研': '以进化搜索和自动实验探索算法、程序与研究流程。',
+  '评测与边界': '检查泛化、反馈可靠性、计算成本及自我改进的适用边界。',
+  '综述与框架': '比较自进化与递归改进的定义、分类体系和研究议程。',
+};
+export const modes = [
+  {value: 'all', label: '所有关联类型'},
+  {value: 'refinement', label: '单次输出修订'},
+  {value: 'persistent', label: '持久自我改进'},
+  {value: 'recursive', label: '递归机制探索'},
+  {value: 'foundation', label: '基础与评测'},
+] as const;
+export type Mode = Exclude<typeof modes[number]['value'], 'all'>;
+export type Paper = {
+  id: string; title: string; en: string; authors: string; date: string;
+  updated: string | null; version: string | null; category: string; keywords: string[];
+  level: string; summary: string; problem: string; insight: string; observation: string;
+  method: string; result: string; boundary: string; relation: string; outlook: string;
+  mode: Mode; feedback: string; evidence: string; reviewedAt: string;
+  sources: {label: string; url: string; basis: string}[];
+};
+export const papers = data as Paper[];
 export const siteOrigin = 'https://zzzriven.github.io';
-export const collectionUpdated = '2026-09-05';
-export function formatDate(date:string){return date.replaceAll('-','.');}
-export function filterPapers(query='',category='全部论文',sort='newest'){
- const words=query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
- return papers.filter(p=>(category==='全部论文'||p.category===category)&&words.every(w=>[p.title,p.en,p.authors,p.summary,p.id,p.level,p.category,...p.keywords].join(' ').toLocaleLowerCase().includes(w))).sort((a,b)=>sort==='oldest'?a.date.localeCompare(b.date):sort==='updated'?(b.updated??b.date).localeCompare(a.updated??a.date):b.date.localeCompare(a.date));
+export const collectionUpdated = '2026-09-12';
+export function formatDate(date: string) {return date.replaceAll('-', '.');}
+export function modeLabel(mode: string) {return modes.find(m => m.value === mode)?.label ?? mode;}
+export function filterPapers(query = '', category = '全部论文', sort = 'newest', mode = 'all') {
+  const words = query.trim().toLocaleLowerCase().split(/\s+/).filter(Boolean);
+  return papers.filter(p => (category === '全部论文' || p.category === category)
+    && (mode === 'all' || p.mode === mode)
+    && words.every(w => [p.title, p.en, p.authors, p.summary, p.id, p.level, p.category, p.problem, p.insight, p.observation, p.method, p.result, p.boundary, p.relation, p.outlook, p.feedback, p.evidence, modeLabel(p.mode), ...p.keywords].join(' ').toLocaleLowerCase().includes(w)))
+    .sort((a, b) => (sort === 'oldest' ? a.date.localeCompare(b.date) : sort === 'updated' ? (b.updated ?? b.date).localeCompare(a.updated ?? a.date) : b.date.localeCompare(a.date)) || a.id.localeCompare(b.id));
 }
