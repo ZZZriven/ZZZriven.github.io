@@ -14,7 +14,7 @@ export function SiteFrame({children}: {children: React.ReactNode}) {
     <a className="skip-link" href="#main">跳到正文</a>
     <header className="rsi-header">
       <a className="rsi-brand" href="/rsi/" aria-label="RSI 研究库首页"><Layers2 size={25} strokeWidth={1.5}/><span><strong>RSI<span className="brand-divider">/</span>研究库</strong><small>RECURSIVE SELF-IMPROVEMENT</small></span></a>
-      <nav className="rsi-nav" aria-label="站点导航"><a href="/rsi/#library">论文</a><a href="/rsi/#methodology">分类方法</a><a href="/rsi/#resources">论文库</a><button onClick={() => setAbout(true)}>关于</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
+      <nav className="rsi-nav" aria-label="站点导航"><a href="/rsi/#library">论文</a><a href="/rsi/#methodology">分类方法</a><a href="/rsi/#resources">阅读路径</a><button onClick={() => setAbout(true)}>关于</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
     </header>
     {children}
     <footer className="rsi-footer"><div><span className="footer-wordmark">RSI / RESEARCH LIBRARY</span><p>记录改进，也记录边界。</p></div><div className="rsi-credit"><span>由 <a href="https://github.com/ZZZriven">{siteOwner.name}</a> 创建与维护</span><a href={'mailto:' + siteOwner.email}>{siteOwner.email}</a><a href="https://github.com/ZZZriven/ZZZriven.github.io">网站源码 <ArrowUpRight size={13}/></a></div></footer>

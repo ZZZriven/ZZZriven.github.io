@@ -1,21 +1,22 @@
 import data from '@/content/papers.json';
 export const categories = ['全部论文', '输出修订', '记忆与技能', '模型与奖励', '智能体与代码', '搜索与科研', '评测与边界', '综述与框架'] as const;
 export const categoryDescriptions: Record<string, string> = {
-  '全部论文': '从单次自反馈到改进机制的递归演化，按研究对象浏览。',
+  '全部论文': '围绕核心研究问题浏览论文，并独立查看系统更新方式与证据。',
   '输出修订': '通过反馈与反思改写当前答案，关注推理阶段的改进。',
-  '记忆与技能': '将经验积累为可在后续任务中调用的记忆、技能与上下文。',
+  '记忆与技能': '研究记忆、技能与上下文的组织和更新，逐篇说明是否在后续尝试或任务中保留。',
   '模型与奖励': '通过自训练、自博弈和自奖励，更新模型参数与学习信号。',
   '智能体与代码': '优化提示词、工作流、工具和智能体实现，包含自修改代码。',
-  '搜索与科研': '以进化搜索和自动实验探索算法、程序与研究流程。',
+  '搜索与科研': '研究进化搜索、程序发现与自动实验；区分外部产物优化和研究系统自身更新。',
   '评测与边界': '检查泛化、反馈可靠性、计算成本及自我改进的适用边界。',
   '综述与框架': '比较自进化与递归改进的定义、分类体系和研究议程。',
 };
 export const modes = [
   {value: 'all', label: '所有关联类型'},
   {value: 'refinement', label: '单次输出修订'},
-  {value: 'persistent', label: '持久自我改进'},
-  {value: 'recursive', label: '递归机制探索'},
-  {value: 'foundation', label: '基础与评测'},
+  {value: 'persistent', label: '持久系统优化'},
+  {value: 'recursive', label: '改进器自修改'},
+  {value: 'enabling', label: '相关能力与产物优化'},
+  {value: 'foundation', label: '综述、理论与评测'},
 ] as const;
 export type Mode = Exclude<typeof modes[number]['value'], 'all'>;
 export type Paper = {
