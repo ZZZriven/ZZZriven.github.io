@@ -1,4 +1,5 @@
 import './rsi.css';
+import './dna-background.css';
 import type { Metadata } from 'next';
 import { SiteFrame } from '@/components/rsi/site-frame';
 import { siteOwner } from '@/lib/site';

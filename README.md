@@ -4,7 +4,7 @@
 - RSI 研究库：https://zzzriven.github.io/rsi/
 - 鹈鹕骑行：https://zzzriven.github.io/pelican-cycling.html
 
-RSI 研究库使用暖白、墨绿和低饱和青绿配色，收录 22 篇结构化中文论文解析。页面支持全文检索、七方向分类、RSI 关联类型、日期排序和筛选范围内的随机阅读。查询参数保留筛选条件，可复制当前网址分享。
+RSI 研究库保留原有全屏 DNA 粒子螺旋背景，搭配暖白阅读区域、墨绿和低饱和青绿配色，收录 22 篇结构化中文论文解析。页面支持全文检索、七方向分类、RSI 关联类型、日期排序和筛选范围内的随机阅读。查询参数保留筛选条件，可复制当前网址分享。
 
 ## 分类与来源
 
@@ -29,6 +29,7 @@ RSI 研究库使用暖白、墨绿和低饱和青绿配色，收录 22 篇结构
 - `lib/papers.ts`：数据类型、分类说明和组合筛选。
 - `app/rsi/papers/[id]/page.tsx`：论文详情和静态路由。
 - `app/rsi/rsi.css`：RSI 界面配色及响应式布局。
+- `app/rsi/dna-background.css`：原始 DNA 背景、遮罩及阅读区域对比度。
 - `app/globals.css`：公共基础与个人主页样式。
 - `components/rsi/site-frame.tsx`：导航、页脚、关于弹窗。
 - `lib/site.ts`：维护者联系信息。
@@ -53,12 +54,12 @@ GitHub Pages 从 main 的 `/docs` 发布。构建会校验所有预期路由，�
 
 ## 个人主页与素材
 
-个人主页继续使用鹈鹕海岸骑行动画，其源文件为 `public/pelican-cycling.html`。首页通过 `?background=1` 复用，保留暂停、减少动态效果和独立页面入口。RSI 阅读页面不加载背景视频。
+个人主页继续使用鹈鹕海岸骑行动画，其源文件为 `public/pelican-cycling.html`。首页通过 `?background=1` 复用，保留暂停、减少动态效果和独立页面入口。RSI 页面在桌面加载原有静音 DNA 螺旋视频，并提供暂停/继续按钮；手机、节省流量和减少动态效果模式使用原始静态封面，页面切到后台时暂停播放。
 
-`public/fonts/` 为本地 Inter 拉丁字体及 OFL 许可；中文使用系统字体。旧版背景素材保留于 `public/media/`，不参与 RSI 新界面展示。
+`public/fonts/` 为本地 Inter 拉丁字体及 OFL 许可；中文使用系统字体。DNA 背景素材位于 `public/media/`，首页与论文详情共用。
 
 ### 本次验证记录（2026-09-12）
 
 生产静态导出、TypeScript 和本次修改文件的 oxlint 检查通过。浏览器验证覆盖 22 个详情路由、检索/分类/关联交集、URL 刷新恢复、排序、随机阅读、空状态、关于弹窗，以及 320/390/768/1440 像素布局，无运行时错误或本地资源失败。
 
-全仓 `npm run lint` 仍报告 20 个既有问题，位于通用 `components/ui/`、`hooks/use-mobile.ts` 与未使用的旧版背景组件；没有把这些组件纳入本次内容及界面修改。生成的 `docs/` 已从源码 lint 中排除。
+全仓 `npm run lint` 仍报告 20 个既有问题，位于通用 `components/ui/`、`hooks/use-mobile.ts` 与DNA 背景组件的原生图片标签检查；没有把这些组件纳入本次内容及界面修改。生成的 `docs/` 已从源码 lint 中排除。

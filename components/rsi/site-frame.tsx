@@ -3,12 +3,14 @@
 import { useState } from 'react';
 import { ArrowUpRight, Layers2, X } from 'lucide-react';
 import { Dialog, DialogContent, DialogTitle, DialogDescription, DialogClose } from '@/components/ui/dialog';
+import { EvolutionBackground } from '@/components/rsi/evolution-background';
 import { siteOwner } from '@/lib/site';
 import { papers } from '@/lib/papers';
 
 export function SiteFrame({children}: {children: React.ReactNode}) {
   const [about, setAbout] = useState(false);
   return <div className="rsi-site">
+    <EvolutionBackground/>
     <a className="skip-link" href="#main">跳到正文</a>
     <header className="rsi-header">
       <a className="rsi-brand" href="/rsi/" aria-label="RSI 研究库首页"><Layers2 size={25} strokeWidth={1.5}/><span><strong>RSI<span className="brand-divider">/</span>研究库</strong><small>RECURSIVE SELF-IMPROVEMENT</small></span></a>
