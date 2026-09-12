@@ -1,15 +1,15 @@
-/* Original DNA footage; the shared ink scrim keeps every frame readable. */
-.evolution-background { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100vh; height: 100dvh; overflow: hidden; pointer-events: none; background: #0d1416; }
+/* Preserve the original DNA footage, recolored in CSS for a sunlit page. */
+.evolution-background { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100vh; height: 100dvh; overflow: hidden; pointer-events: none; background: #faf8f1; }
 .evolution-poster, .evolution-video, .evolution-scrim { position: absolute; inset: 0; width: 100%; height: 100%; }
-.evolution-poster, .evolution-video { object-fit: cover; object-position: 65% center; }
+.evolution-poster, .evolution-video { object-fit: cover; object-position: 65% center; filter: invert(1) hue-rotate(180deg) saturate(.48); }
 .evolution-video { opacity: 0; transition: opacity 1s ease; }
 .evolution-video.is-ready { opacity: 1; }
-.evolution-scrim { background: linear-gradient(90deg, #0b1417ed 0%, #0d171bbd 38%, #10191ac7 76%, #0d171bbf 100%), linear-gradient(180deg, #0d171b40 0%, #0d171b10 38%, #0d171bc9 100%); }
-.motion-control { position: fixed; right: 22px; bottom: 22px; z-index: 20; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #d3ba8d60; border-radius: 50%; background: #162023f0; color: #d3ba8d; box-shadow: 0 5px 25px #0003; }
-.motion-control:hover { background: #283033; }
-.motion-control:focus-visible { outline: 2px solid #d3ba8d; outline-offset: 4px; }
+.evolution-scrim { background: linear-gradient(90deg, #faf8f1f2 0%, #faf8f1c9 40%, #fff8df78 78%, #faf8f1ad 100%), linear-gradient(180deg, #fff9e040 0%, #fff9e000 42%, #faf8f1e6 100%); }
+.motion-control { position: fixed; right: 22px; bottom: 22px; z-index: 20; display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid #81935f80; border-radius: 50%; background: #fffdf5f5; color: #436750; box-shadow: 0 5px 25px #65734716; }
+.motion-control:hover { background: #edf2e5; }
+.motion-control:focus-visible { outline: 2px solid #436750; outline-offset: 4px; }
 @media (max-width: 600px) {
   .evolution-poster, .evolution-video { object-position: 58% center; }
-  .evolution-scrim { background: linear-gradient(90deg, #0b1417ed, #0d171bc2), linear-gradient(180deg, #0d171b10, #0d171ba6); }
+  .evolution-scrim { background: linear-gradient(90deg, #faf8f1f2, #faf8f1ad), linear-gradient(180deg, #fff9e030, #faf8f1eb); }
 }
 @media (prefers-reduced-motion: reduce) { .evolution-video { display: none; } }
