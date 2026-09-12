@@ -11,7 +11,7 @@ export default function Home() {
       <h1>个人主页<span>。</span></h1>
       <p>个人信息待填写。</p>
       <nav className="personal-projects" aria-label="主页项目">
-        <a href="/rsi/" className="personal-project">RSI 研究库 <span aria-hidden="true">↗</span></a>
+        <a href="/rsi/" className="personal-project">RSI Paper <span aria-hidden="true">↗</span></a>
         <a href="/pelican-cycling.html" className="personal-ride-link">去海边兜风 <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
