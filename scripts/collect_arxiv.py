@@ -195,7 +195,7 @@ class ArxivClient:
             parameters = urllib.parse.parse_qs(urllib.parse.urlsplit(url).query)
             self.progress(f"Requesting arXiv page at offset {parameters.get('start', ['0'])[0]} (attempt {attempt + 1}/{self.config['maxRetries'] + 1}).")
             request = urllib.request.Request(url, headers={
-                "User-Agent": "RSI-Paper/1.0 (https://zzzriven.github.io/rsi/; daily metadata discovery)",
+                "User-Agent": "RSI-Paper/1.0 (https://boran002.github.io/rsi/; daily metadata discovery)",
                 "Accept": "application/atom+xml",
             })
             try:

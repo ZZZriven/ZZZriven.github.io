@@ -1,8 +1,8 @@
 # 个人主页与 RSI Paper
 
-- 个人主页：https://zzzriven.github.io/
-- RSI Paper：https://zzzriven.github.io/rsi/
-- 鹈鹕骑行：https://zzzriven.github.io/pelican-cycling.html
+- 个人主页：https://boran002.github.io/
+- RSI Paper：https://boran002.github.io/rsi/
+- 鹈鹕骑行：https://boran002.github.io/pelican-cycling.html
 
 RSI Paper 保留原有全屏 DNA 粒子螺旋背景，以暖白底、深灰文字、鼠尾草绿与柔和金色统一导航、论文索引与详情页的视觉设计，收录 46 篇结构化中文论文解析。页面支持全文检索、七方向分类、RSI 关联类型、日期排序和筛选范围内的随机阅读。论文每页 12 篇；查询参数保留筛选条件及页码，可复制当前网址分享。筛选变化回到第一页，越界或无效页码会规范化，翻页后键盘焦点移至结果标题。
 
