@@ -1,0 +1,8 @@
+{
+  "updatedAt": null,
+  "source": "arXiv",
+  "query": "((all:\"recursive self-improvement\" OR all:\"recursive self-improving\" OR all:\"self-evolving agent\" OR all:\"self-evolving agents\" OR all:\"self-improving agent\" OR all:\"self-improving agents\" OR all:\"agent self-evolution\" OR all:\"agentic self-improvement\" OR all:\"continual learning agents\" OR all:\"lifelong learning agents\" OR all:\"self-optimizing agents\" OR all:\"self-improving language models\" OR all:\"self-evolving language models\" OR all:\"self-rewarding language models\" OR all:\"self-evolution of agents\" OR all:\"self-evolution of agent\" OR all:\"self-improving language model\" OR all:\"self-evolving language model\" OR all:\"self-rewarding language model\") OR ((all:\"memory optimization\" OR all:\"memory evolution\" OR all:\"workflow optimization\" OR all:\"workflow evolution\" OR all:\"prompt optimization\" OR all:\"self-evolving memory\" OR all:\"self-improving memory\" OR all:\"self-evolving workflow\" OR all:\"self-improving workflow\" OR all:\"self-evolving workflows\" OR all:\"self-improving workflows\") AND (all:\"agent\" OR all:\"agents\" OR all:\"agentic\"))) AND (cat:cs.AI OR cat:cs.LG OR cat:cs.CL OR cat:cs.MA OR cat:stat.ML)",
+  "status": "never-run",
+  "items": [],
+  "lastRun": null
+}

@@ -1,0 +1,55 @@
+{
+  "terms": [
+    "recursive self-improvement",
+    "recursive self-improving",
+    "self-evolving agent",
+    "self-evolving agents",
+    "self-improving agent",
+    "self-improving agents",
+    "agent self-evolution",
+    "agentic self-improvement",
+    "continual learning agents",
+    "lifelong learning agents",
+    "self-optimizing agents",
+    "self-improving language models",
+    "self-evolving language models",
+    "self-rewarding language models",
+    "self-evolution of agents",
+    "self-evolution of agent",
+    "self-improving language model",
+    "self-evolving language model",
+    "self-rewarding language model"
+  ],
+  "agentTerms": [
+    "agent",
+    "agents",
+    "agentic"
+  ],
+  "agentOptimizationTerms": [
+    "memory optimization",
+    "memory evolution",
+    "workflow optimization",
+    "workflow evolution",
+    "prompt optimization",
+    "self-evolving memory",
+    "self-improving memory",
+    "self-evolving workflow",
+    "self-improving workflow",
+    "self-evolving workflows",
+    "self-improving workflows"
+  ],
+  "categories": [
+    "cs.AI",
+    "cs.LG",
+    "cs.CL",
+    "cs.MA",
+    "stat.ML"
+  ],
+  "lookbackDays": 10,
+  "initialLookbackDays": 30,
+  "pageSize": 100,
+  "maxResults": 1000,
+  "requestDelaySeconds": 3.2,
+  "requestTimeoutSeconds": 45,
+  "maxRetries": 3
+}

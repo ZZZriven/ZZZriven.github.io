@@ -1,0 +1,638 @@
+{
+  "version": 1,
+  "languagePolicy": "Use canonical English technical terms in labels and notes; retain Chinese explanatory prose. Resolve meaning before normalization: 提示 may be a Chinese verb; 推理 may mean reasoning or inference; 策略 may mean a learned policy or general strategy; 后训练 must refer to post-training rather than a clause ending in 后 followed by 训练. Match longer phrases before shorter aliases.",
+  "categories": {
+    "Output Refinement": [
+      "输出修订"
+    ],
+    "Memory & Skills": [
+      "记忆与技能"
+    ],
+    "Models & Rewards": [
+      "模型与奖励"
+    ],
+    "Agents & Code": [
+      "智能体与代码"
+    ],
+    "Search & Discovery": [
+      "搜索与科研"
+    ],
+    "Evaluation & Limits": [
+      "评测与边界"
+    ],
+    "Surveys & Frameworks": [
+      "综述与框架"
+    ]
+  },
+  "terms": {
+    "Recursive Self-Improvement": [
+      "递归自我改进",
+      "递归自改进"
+    ],
+    "Self-Evolving Agent": [
+      "自进化智能体"
+    ],
+    "self-evolution": [
+      "自进化"
+    ],
+    "self-improvement": [
+      "自我改进",
+      "自改进"
+    ],
+    "self-modification": [
+      "自我修改",
+      "自修改"
+    ],
+    "Improver Self-Modification": [
+      "改进器自修改"
+    ],
+    "Persistent System Improvement": [
+      "持久系统优化"
+    ],
+    "Output Refinement": [
+      "单次输出修订"
+    ],
+    "Enabling Methods & Artifacts": [
+      "相关能力与产物优化"
+    ],
+    "Surveys, Theory & Evaluation": [
+      "综述、理论与评测"
+    ],
+    "Agent": [
+      "智能体"
+    ],
+    "multi-Agent collaboration": [
+      "多智能体协作",
+      "多智能体协同"
+    ],
+    "Meta-Agent": [
+      "元智能体"
+    ],
+    "coding Agent": [
+      "编程智能体"
+    ],
+    "self-training": [
+      "自训练"
+    ],
+    "reinforced self-training": [
+      "强化自训练"
+    ],
+    "self-play": [
+      "自博弈"
+    ],
+    "self-rewarding": [
+      "自奖励"
+    ],
+    "reinforcement learning": [
+      "强化学习"
+    ],
+    "online reinforcement learning": [
+      "在线强化学习"
+    ],
+    "offline reinforcement learning": [
+      "离线强化学习"
+    ],
+    "verbal reinforcement learning": [
+      "语言强化学习"
+    ],
+    "supervised learning": [
+      "监督学习"
+    ],
+    "contrastive learning": [
+      "对比学习"
+    ],
+    "continual learning": [
+      "持续学习"
+    ],
+    "lifelong learning": [
+      "终身学习"
+    ],
+    "nonparametric learning": [
+      "非参数学习"
+    ],
+    "inference-time": [
+      "推理时"
+    ],
+    "inference budget": [
+      "推理预算"
+    ],
+    "inference compute": [
+      "推理计算"
+    ],
+    "inference rounds": [
+      "推理轮次"
+    ],
+    "test-time adaptation": [
+      "测试时适应"
+    ],
+    "test-time": [
+      "测试时"
+    ],
+    "post-training": [
+      "后训练"
+    ],
+    "fine-tuning": [
+      "微调"
+    ],
+    "supervised fine-tuning": [
+      "监督微调"
+    ],
+    "instruction tuning": [
+      "指令微调"
+    ],
+    "pre-training": [
+      "预训练"
+    ],
+    "foundation model": [
+      "基础模型"
+    ],
+    "base language model": [
+      "基础语言模型"
+    ],
+    "pretrained model": [
+      "预训练模型"
+    ],
+    "large language model": [
+      "大语言模型",
+      "大型语言模型"
+    ],
+    "language model": [
+      "语言模型"
+    ],
+    "reward model": [
+      "奖励模型"
+    ],
+    "feedback model": [
+      "反馈模型"
+    ],
+    "preference model": [
+      "偏好模型"
+    ],
+    "judge model": [
+      "评判模型",
+      "评判者模型"
+    ],
+    "judge": [
+      "评判者"
+    ],
+    "verifier": [
+      "验证器"
+    ],
+    "correctness checker": [
+      "正确性检查器"
+    ],
+    "checker": [
+      "检查器"
+    ],
+    "evaluator": [
+      "评估器",
+      "评测器",
+      "评价器"
+    ],
+    "generator": [
+      "生成器"
+    ],
+    "optimizer": [
+      "优化器"
+    ],
+    "improver": [
+      "改进器"
+    ],
+    "solver": [
+      "求解器"
+    ],
+    "executor": [
+      "执行器"
+    ],
+    "prompt": [
+      "提示词",
+      "提示"
+    ],
+    "meta-prompt": [
+      "元提示"
+    ],
+    "system prompt": [
+      "系统提示"
+    ],
+    "mutation prompt": [
+      "变异提示"
+    ],
+    "prompt optimization": [
+      "提示优化"
+    ],
+    "prompt evolution": [
+      "提示演化",
+      "提示进化"
+    ],
+    "prompt strategy": [
+      "提示策略"
+    ],
+    "prompting": [
+      "提示式"
+    ],
+    "workflow": [
+      "工作流程",
+      "工作流"
+    ],
+    "model weights": [
+      "模型权重"
+    ],
+    "model parameters": [
+      "模型参数"
+    ],
+    "weights": [
+      "权重"
+    ],
+    "context engineering": [
+      "上下文工程"
+    ],
+    "context": [
+      "上下文"
+    ],
+    "scaffold": [
+      "系统支架",
+      "运行支架",
+      "执行支架",
+      "支架"
+    ],
+    "agent harness": [
+      "系统包装"
+    ],
+    "model collapse": [
+      "模型坍缩"
+    ],
+    "chain of thought": [
+      "思维链"
+    ],
+    "reasoning": [
+      "推理"
+    ],
+    "reflection": [
+      "反思"
+    ],
+    "self-critique": [
+      "自批评"
+    ],
+    "self-correction": [
+      "自纠错",
+      "自纠正"
+    ],
+    "intrinsic self-correction": [
+      "内生自纠错",
+      "内生自纠正"
+    ],
+    "self-consistency": [
+      "自一致性"
+    ],
+    "feedback": [
+      "反馈"
+    ],
+    "self-feedback": [
+      "自反馈"
+    ],
+    "execution feedback": [
+      "执行反馈"
+    ],
+    "external feedback": [
+      "外部反馈"
+    ],
+    "intrinsic feedback": [
+      "内生反馈"
+    ],
+    "environment feedback": [
+      "环境反馈"
+    ],
+    "strategy": [
+      "策略"
+    ],
+    "policy": [
+      "策略函数"
+    ],
+    "policy gradient": [
+      "策略梯度"
+    ],
+    "policy reflection": [
+      "策略反思"
+    ],
+    "direct preference optimization": [
+      "直接偏好优化"
+    ],
+    "alignment": [
+      "对齐"
+    ],
+    "iterative alignment": [
+      "迭代对齐"
+    ],
+    "preference alignment": [
+      "偏好对齐"
+    ],
+    "reward calibration": [
+      "奖励校准"
+    ],
+    "reward overfitting": [
+      "奖励过拟合"
+    ],
+    "reward hacking": [
+      "奖励黑客",
+      "奖励投机"
+    ],
+    "reward": [
+      "奖励"
+    ],
+    "overfitting": [
+      "过拟合"
+    ],
+    "catastrophic forgetting": [
+      "灾难性遗忘"
+    ],
+    "distribution shift": [
+      "分布迁移",
+      "分布偏移"
+    ],
+    "data contamination": [
+      "数据污染"
+    ],
+    "synthetic data": [
+      "合成数据",
+      "生成数据"
+    ],
+    "self-generated data": [
+      "自生成数据"
+    ],
+    "synthetic preferences": [
+      "合成偏好"
+    ],
+    "instruction following": [
+      "指令遵循"
+    ],
+    "instruction": [
+      "指令"
+    ],
+    "benchmark": [
+      "基准"
+    ],
+    "machine learning engineering": [
+      "机器学习工程"
+    ],
+    "machine learning": [
+      "机器学习"
+    ],
+    "held-out tasks": [
+      "独立保留任务",
+      "留出任务"
+    ],
+    "validation set": [
+      "验证集"
+    ],
+    "held-out set": [
+      "留出集"
+    ],
+    "zero-shot": [
+      "零样本"
+    ],
+    "few-shot": [
+      "少样本"
+    ],
+    "behavior cloning": [
+      "行为克隆"
+    ],
+    "best response": [
+      "最优响应"
+    ],
+    "condition number": [
+      "条件数"
+    ],
+    "error bound": [
+      "误差界"
+    ],
+    "finite-sample error": [
+      "有限样本误差"
+    ],
+    "generalization": [
+      "泛化"
+    ],
+    "ablation": [
+      "消融"
+    ],
+    "episodic memory": [
+      "情景记忆"
+    ],
+    "causal memory": [
+      "因果记忆"
+    ],
+    "long-term memory": [
+      "长期记忆"
+    ],
+    "persistent memory": [
+      "持久记忆"
+    ],
+    "external memory": [
+      "外部记忆"
+    ],
+    "memory buffer": [
+      "记忆缓冲区"
+    ],
+    "memory hierarchy": [
+      "记忆层级",
+      "记忆层次"
+    ],
+    "memory": [
+      "记忆"
+    ],
+    "skill library": [
+      "技能库"
+    ],
+    "skill": [
+      "技能"
+    ],
+    "curriculum": [
+      "课程"
+    ],
+    "curriculum learning": [
+      "课程学习"
+    ],
+    "search": [
+      "搜索"
+    ],
+    "Monte Carlo tree search": [
+      "蒙特卡洛树搜索"
+    ],
+    "depth-first search": [
+      "深度优先搜索"
+    ],
+    "tree search": [
+      "树搜索"
+    ],
+    "beam search": [
+      "束搜索"
+    ],
+    "genetic algorithm": [
+      "遗传算法"
+    ],
+    "simulated annealing": [
+      "模拟退火"
+    ],
+    "evolutionary search": [
+      "演化搜索",
+      "进化搜索"
+    ],
+    "Bayesian optimization": [
+      "贝叶斯优化"
+    ],
+    "acquisition function": [
+      "采集函数"
+    ],
+    "utility function": [
+      "效用函数"
+    ],
+    "objective function": [
+      "目标函数"
+    ],
+    "hypermutation": [
+      "超变异"
+    ],
+    "mutation": [
+      "变异"
+    ],
+    "fitness": [
+      "适应度"
+    ],
+    "population selection": [
+      "种群选择"
+    ],
+    "population": [
+      "种群"
+    ],
+    "tournament selection": [
+      "锦标赛选择"
+    ],
+    "Pareto frontier": [
+      "Pareto 前沿"
+    ],
+    "computation graph": [
+      "计算图"
+    ],
+    "textual gradient": [
+      "文本梯度"
+    ],
+    "gradient": [
+      "梯度"
+    ],
+    "world model": [
+      "世界模型"
+    ],
+    "world modeling": [
+      "世界建模"
+    ],
+    "world belief": [
+      "世界信念"
+    ],
+    "function calling": [
+      "函数调用"
+    ],
+    "planning": [
+      "行为规划"
+    ],
+    "checkpoint": [
+      "检查点"
+    ],
+    "control flow": [
+      "控制流程",
+      "控制流"
+    ],
+    "control logic": [
+      "控制逻辑"
+    ],
+    "semantic representation": [
+      "语义表示"
+    ],
+    "solver stack": [
+      "求解器堆栈",
+      "求解堆栈"
+    ],
+    "meta-operator": [
+      "元操作",
+      "元算子"
+    ],
+    "update operator": [
+      "更新算子"
+    ],
+    "multi-hop": [
+      "多跳"
+    ],
+    "execution trace": [
+      "执行轨迹"
+    ],
+    "optimization trajectory": [
+      "优化轨迹"
+    ],
+    "mixture head": [
+      "混合头"
+    ],
+    "log-likelihood": [
+      "对数似然"
+    ],
+    "model": [
+      "模型"
+    ],
+    "recursive optimization": [
+      "递归优化",
+      "递归改进"
+    ],
+    "recursive evolution": [
+      "递归演化"
+    ],
+    "recursive training": [
+      "递归训练"
+    ],
+    "recursive call": [
+      "递归调用"
+    ],
+    "recursion": [
+      "递归"
+    ],
+    "recursive system": [
+      "递归系统"
+    ],
+    "recursive input": [
+      "递归输入"
+    ],
+    "recursive objective": [
+      "递归目标"
+    ],
+    "recursive scope": [
+      "递归范围"
+    ],
+    "recursive enhancement": [
+      "递归增强"
+    ],
+    "compound AI system": [
+      "复合 AI 系统",
+      "复合AI系统"
+    ],
+    "cross-task transfer": [
+      "跨任务迁移"
+    ],
+    "distribution tails": [
+      "分布尾部"
+    ],
+    "causal evaluation": [
+      "因果评测"
+    ],
+    "cross-session": [
+      "跨会话"
+    ],
+    "cross-trial": [
+      "跨试次"
+    ],
+    "long-horizon": [
+      "长程"
+    ],
+    "software engineering": [
+      "软件工程"
+    ],
+    "baseline": [
+      "基线"
+    ]
+  }
+}

@@ -4,8 +4,8 @@ import type { Metadata } from 'next';
 import { SiteFrame } from '@/components/rsi/site-frame';
 import { siteOwner } from '@/lib/site';
 export const metadata: Metadata = {
-  title: 'RSI Paper · 递归自我改进论文',
-  description: '精选 AI 递归自我改进与相关机制研究，按七个研究方向分类，提供 Research problem、Insight、Observation、Method、结果与展望，附原文来源及证据边界。',
+  title: 'RSI Paper · Recursive Self-Improvement & Self-Evolving Agents',
+  description: '精选 Recursive Self-Improvement 与 Self-Evolving Agents 研究，按七个研究方向分类，提供 Research Problem、Insight、Observation、Method、Results、Limitations 与 Outlook，附 arXiv 原文与每日发现。',
   authors: [{ name: siteOwner.name, url: 'https://github.com/ZZZriven' }],
   creator: siteOwner.name,
   alternates: { canonical: '/rsi/' },
