@@ -32,14 +32,12 @@ ROOT = Path(__file__).resolve().parents[1]
 API = "https://export.arxiv.org/api/query"
 NS = {"a": "http://www.w3.org/2005/Atom", "o": "http://a9.com/-/spec/opensearch/1.1/"}
 ID_PATTERN = re.compile(r"^(?P<id>(?:\d{4}\.\d{4,5}|[a-zA-Z.-]+/\d{7}))(?P<version>v[1-9]\d*)?$")
-CATEGORY_RULES = (
-    ("Surveys & Frameworks", ("survey", "systematic review", "taxonomy", "perspective")),
-    ("Evaluation & Limits", ("benchmark", "evaluation", "evaluating", "limitation", "limits", "collapse", "safety")),
-    ("Memory & Skills", ("memory", "memories", "skill", "lifelong", "continual learning")),
-    ("Models & Rewards", ("reward", "fine tuning", "finetuning", "reinforcement learning", "self training", "distillation")),
-    ("Search & Discovery", ("scientific discovery", "scientific research", "research agent", "algorithm discovery", "bayesian optimization")),
-    ("Output Refinement", ("self correction", "self refinement", "self refine", "iterative refinement")),
-    ("Agents & Code", ("agent", "agentic", "workflow", "code", "program", "prompt")),
+TOPIC_RULES = (
+    ("Model Evolution", ("model evolution", "model self improvement", "self training", "fine tuning", "finetuning", "reward model", "reinforcement learning", "distillation")),
+    ("Prompt & Context Evolution", ("prompt optimization", "prompt evolution", "context engineering", "context adaptation", "prompt tuning")),
+    ("Memory Evolution", ("memory", "memories", "episodic", "experience retention")),
+    ("Tool & Skill Evolution", ("skill", "skills", "tool generation", "tool creation", "tool evolution", "skill library")),
+    ("Architecture Evolution", ("workflow", "architecture", "orchestration", "self modifying code", "self modification", "agent design")),
 )
 
 
@@ -121,15 +119,34 @@ def relevance(entry: dict, config: dict) -> list[str]:
     return list(dict.fromkeys(matches))
 
 
+def classify_axes(entry: dict) -> dict:
+    """Provisional topical coverage only. Roles and RSI evidence need full text."""
+    text = entry["title"] + " " + entry["abstract"]
+    topics, reasons = [], []
+    for topic, terms in TOPIC_RULES:
+        found = next((term for term in terms if has_term(text, term)), None)
+        if found:
+            topics.append(topic)
+            reasons.append(f"{topic}: '{found}'")
+    title = normalize(entry["title"])
+    if any(has_term(title, term) for term in ("survey", "systematic review")):
+        paper_type = "Survey"
+    elif any(has_term(title, term) for term in ("theoretical", "theory", "theoretical guarantees")):
+        paper_type = "Theory"
+    elif "bench" in title.split() or any(word.endswith("bench") for word in title.split()) or has_term(title, "benchmark") or has_term(title, "benchmarking"):
+        paper_type = "Benchmark"
+    elif has_term(title, "empirical analysis"):
+        paper_type = "Empirical Analysis"
+    else:
+        paper_type = "Unclassified"
+    reason = "; ".join(reasons) if reasons else "No explicit Evolution Target keyword matched"
+    reason += f". Paper Type: {paper_type} (title-based). Provisional coverage from title/abstract; full-paper review must establish actual updates, System Boundary, Loop Role, Persistence and Evidence. No RSI capability is inferred."
+    return {"topics": topics, "paperType": paper_type, "classificationReason": reason}
+
+
 def classify(entry: dict) -> tuple[str, str]:
-    # Labels describe a tentative research theme, never evidence of true RSI.
-    # Title signals precede abstract signals; all results require later analysis.
-    for location in ("title", "abstract"):
-        for category, terms in CATEGORY_RULES:
-            found = [term for term in terms if has_term(entry[location], term)]
-            if found:
-                return category, f"Provisional topic: {location} contains '{found[0]}'. Full-paper review is required; this is not an RSI capability claim."
-    return "Agents & Code", "Provisional fallback for an agent/self-improvement query match; the main research problem requires full-paper review. No RSI capability is inferred."
+    axes = classify_axes(entry)
+    return (axes["topics"][0] if axes["topics"] else "Unclassified", axes["classificationReason"])
 
 
 def parse_page(xml: bytes) -> tuple[int, int, list[dict]]:
@@ -318,9 +335,10 @@ def collect(config: dict, existing: dict, curated: list[dict], now: datetime, *,
         matches = relevance(entry, config)
         if not matches:
             continue
-        category, reason = classify(entry)
+        axes = classify_axes(entry)
+        category = axes["topics"][0] if axes["topics"] else "Unclassified"
         public = {key: value for key, value in entry.items() if not key.startswith("_")}
-        public.update({"category": category, "provisional": True, "classificationReason": reason, "matchedTerms": matches, "firstSeenAt": stamp, "lastSeenAt": stamp, "status": "awaiting-analysis"})
+        public.update({"category": category, "provisional": True, **axes, "matchedTerms": matches, "firstSeenAt": stamp, "lastSeenAt": stamp, "status": "awaiting-analysis"})
         old = backlog.get(ident)
         if old:
             public["firstSeenAt"] = old["firstSeenAt"]

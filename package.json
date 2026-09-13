@@ -11,9 +11,10 @@
     "start": "vinext start",
     "lint": "oxlint",
     "format": "oxfmt",
-    "build:pages": "vinext build && node scripts/export-pages.mjs",
+    "build:pages": "npm run check:papers && vinext build && node scripts/export-pages.mjs",
     "collect:arxiv": "python3 scripts/collect_arxiv.py",
-    "test:arxiv": "python3 scripts/test_collect_arxiv.py"
+    "test:arxiv": "python3 scripts/test_collect_arxiv.py",
+    "check:papers": "python3 scripts/check_papers.py"
   },
   "dependencies": {
     "react": "19.2.6",

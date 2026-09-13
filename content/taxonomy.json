@@ -1,0 +1,1448 @@
+{
+  "2601.22513": {
+    "paperType": "Theory",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Formal Model",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Theoretical Guarantee"
+        ],
+        "boundary": "Theoretical Analysis；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Formal Model 分析迭代自奖励的稳定性与有限样本条件；Theoretical Guarantee 限于其定义的事件和假设，不属于已运行的全系统 RSI 实验。",
+        "feedback": "形式化 self-rewarding 来自当前 policy 的对数概率；下一轮 policy 通过论文定义的 DPO 类目标更新。",
+        "scope": "论文的 best response 与 self-rewarding 由 model 内部概率定义；内部一致性保证不能直接推出外部事实正确性或人类 preference alignment，也不等于无限改进。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2601.22513v2"
+      }
+    ]
+  },
+  "2505.22954": {
+    "paperType": "Method",
+    "topics": [
+      "Architecture Evolution",
+      "Tool & Skill Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Architecture Evolution",
+          "Tool & Skill Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Proposer",
+          "Integrator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse",
+          "Held-out Transfer"
+        ],
+        "boundary": "Agent Code；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Agent 后代进入后续 self-modification；FM weights、archive maintenance 和 parent selection 保持固定。Recursive Reuse 记录结构，有限任务成绩不能证明无限改进。",
+        "feedback": "来自编程 benchmark 的执行结果、测试得分与评估日志；通过外部可执行任务验证候选 Agent。",
+        "scope": "foundation model weights 冻结，开放探索中的档案维护与父代选择也固定；benchmark 得分提升是代码系统改进证据，不能直接推出全系统无约束 recursive evolution。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2505.22954v3"
+      }
+    ]
+  },
+  "2505.03335": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Held-out Transfer",
+          "Recursive Reuse"
+        ],
+        "boundary": "Model & Curriculum；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Proposer 与 Solver 在 self-play 中共同更新，下一轮任务生成受到新策略影响；Recursive Reuse 不等同 Controlled Successor Gain。",
+        "feedback": "代码 executor 验证任务有效性与答案；出题 reward 反映可学习性，解题 reward 反映可验证正确性。",
+        "scope": "零外部数据指这一训练过程不使用外部题库；系统仍依赖 pretrained model、执行环境和人为设计的 reward 机制。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2505.03335v3"
+      }
+    ]
+  },
+  "2504.15228": {
+    "paperType": "Method",
+    "topics": [
+      "Architecture Evolution",
+      "Tool & Skill Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Architecture Evolution",
+          "Tool & Skill Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Proposer",
+          "Integrator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Agent Code；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "保存新 Agent 实现，并让高 Utility 的版本接管后续修改。Model Weights、外部 Benchmark 与 Utility 权重固定；Recursive Reuse 与任务表现分别有机制和实验依据。",
+        "feedback": "编程与合成 benchmark 的得分、运行时间、费用及执行记录，共同决定后续使用的 Agent 版本。",
+        "scope": "这一数字来自论文的随机子集和资源约束，不能与完整 SWE-bench Verified 榜单直接横比；代码演化不等于 foundation model 学习，单次迭代也可能退步。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2504.15228v2"
+      }
+    ]
+  },
+  "2401.10020": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator",
+          "Evaluator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse",
+          "Improver Quality Gain"
+        ],
+        "boundary": "Model Weights；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "更新后的 Model 同时生成 responses 与评价下一轮 preferences；有独立 judge-quality 结果，缺少把 successor gain 归因于该变化的全面受控实验。",
+        "feedback": "model 通过 LLM-as-a-Judge prompt 为候选回答打分，由此形成偏好对并用于迭代 DPO。",
+        "scope": "这些结果对应有限训练轮数与特定评估；持续改进是否稳定，需要更长周期与独立评价。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2401.10020v3"
+      }
+    ]
+  },
+  "2310.02304": {
+    "paperType": "Method",
+    "topics": [
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Architecture Evolution"
+        ],
+        "roles": [
+          "Proposer",
+          "Selector",
+          "Integrator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Optimizer Code；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "更新的 Improver 源码再次用于修改 Improver，属于程序层 Recursive Reuse；LLM 与外部任务分布保持固定。作者对更广 RSI 使用较窄表述，本条只判断明确的程序边界。",
+        "feedback": "人工给定 utility function 评估候选程序；improver 通过下游任务效用获得自身修改的 feedback。",
+        "scope": "论文明确说明 base language model 没有改变，因此这不构成完整的 Recursive Self-Improvement。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/pdf/2310.02304v3"
+      }
+    ]
+  },
+  "2305.16291": {
+    "paperType": "Method",
+    "topics": [
+      "Memory Evolution",
+      "Tool & Skill Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Memory Evolution",
+          "Tool & Skill Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Held-out Transfer"
+        ],
+        "boundary": "Skills & Memory；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "成功代码进入 Skill Library，供后续任务调用；Curriculum 与技能生成流程保持既定设计。技能积累和跨世界迁移不单独证明改进器配置被更新。",
+        "feedback": "Minecraft environment feedback、程序执行错误与 model 自我验证共同指导程序修订；成功程序进入 skill library。",
+        "scope": "改进主要保存在 skill library 和 context 中，不涉及 foundation model 参数更新。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2305.16291v2"
+      }
+    ]
+  },
+  "2303.17651": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Inference-Time Output；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "反馈与修订围绕当前任务输出进行。Weights 与跨任务配置未提交更新，属于 Ephemeral 的 Solver Refinement；Evaluator 被调用不等于 Evaluator 本身被优化。",
+        "feedback": "同一 language model 对当前回答生成自然语言 feedback，再将 feedback 用于下一轮修订；没有参数更新。",
+        "scope": "变化发生在当前回答中；这不是 model weights 或 self-improvement 算法的持续演化。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2303.17651v2"
+      }
+    ]
+  },
+  "2303.11366": {
+    "paperType": "Method",
+    "topics": [
+      "Memory Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Memory Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Attempts",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Skills & Memory；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Reflection Text 保留到后续 Trial，改变 Actor 的输入。主要机制是 Memory 内容更新，固定 Reflection Procedure 没有被该实验重新设计。",
+        "feedback": "外部任务结果或内部模拟信号，可以是标量或自然语言；Agent 将其转写为 episodic memory 中的 reflection。",
+        "scope": "这里的学习通过 reflection memory 实现，并不更新 model weights；效果也依赖 feedback 是否可靠。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2303.11366v4"
+      }
+    ]
+  },
+  "2203.14465": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Model Weights；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "新 Generator 产生下一轮 rationales；每轮 fine-tuning 从原始 pretrained Model 开始。反馈回流可核验，但不能据此确认一般 Improver 能力提高。",
+        "feedback": "数据集正确答案用于筛选 reasoning；失败时也作为重新生成 reasoning 的条件，另有少量人工 reasoning 示例启动。",
+        "scope": "仍需要题目、正确答案及少量 reasoning 示例，不能理解为完全摆脱外部监督。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2203.14465v2"
+      }
+    ]
+  },
+  "2607.13104": {
+    "paperType": "Survey",
+    "topics": [
+      "Model Evolution",
+      "Prompt & Context Evolution",
+      "Memory Evolution",
+      "Tool & Skill Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Conceptual Synthesis"
+        ],
+        "boundary": "Model Parameters & Scaffolds；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "该综述从 model 与 scaffold 组成、更新对象及 feedback 信号分析 Agent self-improvement，帮助区分经验保留、系统更新和能力测量。作为定义与框架研究收录，不把分类方案本身当作 recursive optimization 系统的实证。",
+        "feedback": "综合内生生成、评价 feedback 与环境经验",
+        "scope": "本条核对了 arXiv 摘要与正文框架，未逐页通读 97 页全文。综述覆盖 self-improvement 的广义家族，不意味着每篇收录论文都实现了改进机制自身通过 recursion 获得提升，也不提供通用 RSI 已实现的实证。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2607.13104v1"
+      }
+    ]
+  },
+  "2507.21046": {
+    "paperType": "Survey",
+    "topics": [
+      "Model Evolution",
+      "Prompt & Context Evolution",
+      "Memory Evolution",
+      "Tool & Skill Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Conceptual Synthesis"
+        ],
+        "boundary": "Models, Context, Tools & Architecture；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "编者归类：为 RSI 阅读提供多轴坐标。model、memory、工具或架构的变化属于更新对象，任务内与跨任务属于时间尺度；是否进一步改善了负责更新的机制，仍需逐项检查独立证据。",
+        "feedback": "文本、内部/外部 reward、示范与 population selection",
+        "scope": "本条核读摘要及定义、分类和评测结构，未逐页通读 77 页全文。文中通向 ASI 的描述属于研究愿景；框架覆盖范围比严格 RSI 更广，不能因论文被收录就判断它已经具备 Recursive Self-Improvement 能力。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2507.21046v4"
+      }
+    ]
+  },
+  "2408.08435": {
+    "paperType": "Method",
+    "topics": [
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Architecture Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Held-out Transfer"
+        ],
+        "boundary": "Agent Code & Workflows；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "固定 Meta-Agent 设计 candidate Agent，archive 向搜索提供历史；论文将 Higher-order ADAS 列为未来方向，不能把 archive 增长当作已证明 Improver 更新。",
+        "feedback": "validation set 得分、执行错误与历史设计档案",
+        "scope": "实验仍采用人为提供的 model 接口、validation set、基础框架和 search 轮数；代码空间理论上丰富不等于有限预算可遍历全部设计。本条核读方法与实验章节，未复现实验，也未逐项审计生成 Agent。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2408.08435v2"
+      }
+    ]
+  },
+  "2410.10762": {
+    "paperType": "Method",
+    "topics": [
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Architecture Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Workflow Structure & Prompts；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "更新可跨任务使用的 Workflow 节点及控制结构；MCTS、候选生成器与外部评分流程保持固定。历史树增长本身不构成 Improver 更新证据。",
+        "feedback": "任务执行成绩与树结构修改经验",
+        "scope": "自动化发生在人工指定的任务、算子、评价函数和 search 预算内；主要实验并未同时 search model weights 或评测标准。文中的低 reasoning 费用比较也不应自动解释成包含离线 search 成本的全部生命周期成本。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2410.10762v4"
+      }
+    ]
+  },
+  "2507.19457": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Single- or Multi-Module Prompts；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Reflection 从执行轨迹提取规则并修改目标系统 Prompts。所测收益主要是 Task Gain；固定的候选选择与 Reflection Procedure 没有被证明自更新。",
+        "feedback": "execution trace、诊断文字与任务评价分数",
+        "scope": "本条核对 arXiv 摘要，未通读论文全文或复现实验。优化依赖 reflection model、可用轨迹及评价预算；保存 prompt 并不更新 foundation model 参数，减少轨迹数量也不必然等于同比例降低总算力成本。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2507.19457v2"
+      }
+    ]
+  },
+  "2510.04618": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution",
+      "Memory Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Offline Playbook Adaptation",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Structured Context & Experiential Memory；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "更新的是可保留的 Playbook 内容；Generator、Reflector、Curator 的外层分工保持既定。Offline 与 Online 设置分别记录，内容累积不自动构成 Curator 演化。",
+        "feedback": "任务 execution trace、成功/失败信息与条目使用 feedback",
+        "scope": "收益依赖 reflection 器能否从轨迹提取可靠经验；错误洞见也可能污染 memory。作者明确指出简短 instruction 适合部分任务。本条核读方法、结果摘要和局限章节，未独立复现，也不把 context 变化称为 weights 学习。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2510.04618v3"
+      },
+      {
+        "name": "Online Playbook Adaptation",
+        "targets": [
+          "Prompt & Context Evolution",
+          "Memory Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Structured Context & Experiential Memory；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "更新的是可保留的 Playbook 内容；Generator、Reflector、Curator 的外层分工保持既定。Offline 与 Online 设置分别记录，内容累积不自动构成 Curator 演化。",
+        "feedback": "任务 execution trace、成功/失败信息与条目使用 feedback",
+        "scope": "收益依赖 reflection 器能否从轨迹提取可靠经验；错误洞见也可能污染 memory。作者明确指出简短 instruction 适合部分任务。本条核读方法、结果摘要和局限章节，未独立复现，也不把 context 变化称为 weights 学习。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2510.04618v3"
+      }
+    ]
+  },
+  "2408.06292": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Experience Generator",
+          "Proposer"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Feasibility Demonstration"
+        ],
+        "boundary": "Research Workflow & Idea Archive；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "科研假设、实验代码和 manuscript 是输出产物；自动做研究不等同研究 Agent 更新自己的 Improver。",
+        "feedback": "实验日志、文献检索与 model 生成的评审",
+        "scope": "原论文依赖人工提供的研究方向、初始模板和评价流程；示范主要是小规模 machine learning 实验。自动评审有偏差，写作也可能错误解释数据。本条核读方法、案例与局限材料，未复核全部生成论文。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2408.06292v3"
+      }
+    ]
+  },
+  "2506.13131": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Algorithm Code & Computing Infrastructure；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "主要实验改进外部 candidate programs；程序数据库复用不等同 AlphaEvolve 自身的 Improver 变强。基础设施回流应单独核验。",
+        "feedback": "自动正确性检查、运行性能与多目标评价",
+        "scope": "核验 arXiv 摘要、方法和工程案例相关章节，未复现内部部署或通读全部白皮书。任务目标和自动 evaluator 仍由研究者定义；加速 foundation model 的训练基础设施，不等于已经自动再训练并接替多代发现 Agent。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2506.13131v1"
+      }
+    ]
+  },
+  "2410.07095": {
+    "paperType": "Benchmark",
+    "topics": [
+      "Model Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Benchmark Measurement"
+        ],
+        "boundary": "ML Engineering Evaluation；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "编者归类：这是 RSI 相关 AI 研发能力的外部测量工具，并非 self-improvement 算法。它可检测改进后的系统是否更会完成 machine learning 任务，但还需额外记录系统更新过程，才能将分数变化归因于自主学习。",
+        "feedback": "竞赛评分、历史人类门槛与过程合规检查",
+        "scope": "竞赛工程成绩不直接等于自主发现新算法或 Recursive Self-Improvement。数据泄漏、历史任务可见性、训练资源与代理脚手架都会影响比较；原论文的历史结果必须保留 model 和预算 context。本条核验摘要，未独立重跑竞赛。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2410.07095v6"
+      }
+    ]
+  },
+  "2411.15114": {
+    "paperType": "Benchmark",
+    "topics": [
+      "Model Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Benchmark Measurement"
+        ],
+        "boundary": "AI R&D Evaluation；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "编者归类：它衡量 RSI 可能依赖的研究工程能力，尤其适合检查更长时间是否带来更好研究。benchmark 本身不让系统自动修改 improver，因此评测高分与 recursive optimization 能力之间仍有明确的证据缺口。",
+        "feedback": "环境评分、可执行实验与人类专家参照",
+        "scope": "多数环境允许随时查询评分，比真实科研更容易得到 feedback；七个环境也无法覆盖全部研发工作。32 小时结果包含多次尝试的预算聚合，不等于单次连续研究。本条核读 arXiv 摘要及预算说明，未通读全文。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2411.15114v2"
+      }
+    ]
+  },
+  "2310.01798": {
+    "paperType": "Empirical Analysis",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Negative Result"
+        ],
+        "boundary": "Output Refinement & Feedback Reliability；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "编者归类：这是阅读 Self-Refine、Reflexion 和 self-rewarding 工作的关键对照，提醒读者追问 feedback 来自哪里、谁决定停止。它为 RSI 中的评价可靠性提供经验边界，并不构成通用 RSI 不可能的证明。",
+        "feedback": "比较内生文字 feedback 与答案标签等 external feedback",
+        "scope": "该结论有明确的时间、model 与任务范围，不能作为新一代 model 的免检结论。作者承认可验证 external feedback，以及风格或偏好调整等任务中 self-correction 的作用；本条核读方法、结果和局限，未复现实验。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2310.01798v2"
+      }
+    ]
+  },
+  "2305.17493": {
+    "paperType": "Theory",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Recursive Sampling / Refitting Analysis",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Negative Result",
+          "Theoretical Guarantee",
+          "Recursive Reuse"
+        ],
+        "boundary": "Training Distribution & Multigeneration Learning；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "递归生成数据并再训练确实存在，但结果可以退化；Recursive Reuse 是结构证据，不能被展示为正向能力等级。",
+        "feedback": "前代 synthetic data；研究独立真实分布信息缺失的影响",
+        "scope": "理论结果依赖采样与近似 model 假设，实验也有具体的数据替换及训练配置。本条核读定义、理论动机和实验概览，未逐项验证定理；不能将结果扩大为所有 self-training、蒸馏或带执行验证的方法都会坍缩。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2305.17493v3"
+      }
+    ]
+  },
+  "2608.04003": {
+    "paperType": "Benchmark",
+    "topics": [
+      "Prompt & Context Evolution",
+      "Memory Evolution",
+      "Tool & Skill Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Benchmark Measurement"
+        ],
+        "boundary": "Cross-Session Experience & Causal Evaluation；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Benchmark 通过 Fresh-session 配对测试隔离持久经验，并检查 Save、Retrieve、Update 路径。其 Protocol 提供能力测量，不直接更新被评估 Agent 的 Improver。",
+        "feedback": "有序任务序列的评测结果，以及保存、检索和更新经验的过程证据。",
+        "scope": "这是一套经验利用的评测与诊断证据，不能直接证明 Agent 会修改自己的改进算法。场景和任务片段数也不等于所有个人助理任务的覆盖范围；此条目核验摘要，未复现评测或独立检查轨迹。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2608.04003v1"
+      }
+    ]
+  },
+  "2608.20318": {
+    "paperType": "Benchmark",
+    "topics": [
+      "Model Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Benchmark Measurement"
+        ],
+        "boundary": "Independent Evaluation of Learning Algorithm Design；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Benchmark 测量固定研究仓库中的算法设计，源码重新运行后由独立最终协议评分。未在该 Protocol 中把结果闭合为下一代研究者再改进自身。",
+        "feedback": "固定开发预算内的实验 feedback；最终由隐藏 evaluator 对从头重跑的候选算法评分。",
+        "scope": "一次算法设计评测不包含改进后的 model 成为下一代研究者的完整闭环。固定任务与归一化尺度的选择影响汇总解释，search 预算也限制结论范围；此条目核验摘要，未审计全部提交或复现训练。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2608.20318v1"
+      }
+    ]
+  },
+  "2607.25886": {
+    "paperType": "Benchmark",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Framework / Protocol",
+        "targets": [],
+        "roles": [],
+        "persistence": "Not Applicable",
+        "recursiveReuse": "Not Applicable",
+        "evidence": [
+          "Benchmark Measurement"
+        ],
+        "boundary": "Data Research under Fixed Post-Training；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "统一训练与服务后端，使数据策略成为主要研究变量。Checkpoint 的提升测量目标 Model；研究者根据反馈改数据不等于其自身 Model 或 Improver 配置已训练更新。",
+        "feedback": "固定训练流程得到的 model checkpoint 评测，以及各轮数据 strategy 和研究轨迹。",
+        "scope": "这些实验支持数据研究存在可获得的收益，也显示轨迹回退，但不能证明任意数据 strategy 或 model 都能改善。基础设施与目标 model 固定，此条目仅核验摘要，不能据此判断每类错误的精确因果贡献。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2607.25886v1"
+      }
+    ]
+  },
+  "2608.24735": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution",
+      "Tool & Skill Evolution",
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Prompt & Context Evolution",
+          "Tool & Skill Evolution",
+          "Architecture Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Unclear",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Solver Stack, Strategies & Auxiliary Code；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Ω 固定，生成的新层、Context Conditioning 与 Helpers 持久进入 Solver Stack。输入与结构增长有实验证据，Improver 功能是否因此被持久更新仍需更明确的功能干预，保留 Unclear。",
+        "feedback": "solver stack 的 execution trace、产生轨迹的代码与 benchmark 任务 feedback。",
+        "scope": "Ω 在设计中保持固定，不应把论文对稳定性的动机直接当作一般形式化安全证明。仅核验摘要，尚未逐表检查成本或重复试验；更多层级、更多 search 与真正改进效率提高之间还需严格区分。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2608.24735v1"
+      }
+    ]
+  },
+  "2310.08560": {
+    "paperType": "Method",
+    "topics": [
+      "Memory Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Memory Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Context & External Memory；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Working Context 与外部 Memory 可写并跨 Session 使用；固定的存储层、控制规则和函数接口未被该方法自动重新设计。",
+        "feedback": "memory 函数执行结果、容量预警、用户新信息与检索结果。",
+        "scope": "系统 instruction、函数接口和队列管理规则由设计者提供，model 能改变 memory 内容，不能据此推定它优化了管理算法。检索成功也不等于 memory 真实，长期存储的完整性与长期 reasoning 可靠性仍需分别评价。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2310.08560v2"
+      }
+    ]
+  },
+  "2502.12110": {
+    "paperType": "Method",
+    "topics": [
+      "Memory Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Memory Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Memory Structure & Semantic Representation；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Note 的属性、语境与链接可被后续写入修订，并影响检索。Memory Content / Organization 的变化明确；生成与更新规则本身的递归增益未被证明。",
+        "feedback": "新交互内容、检索到的历史笔记及 model 对关联和 context 属性的判断。",
+        "scope": "可持续变化的是 external memory 及其关系，foundation model 与更新 workflow 没有一起演化。memory 之间相似不代表因果或事实一致；若 model 错误重写旧描述，后续检索也可能继承错误，论文成绩不能排除此类长期风险。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2502.12110v11"
+      }
+    ]
+  },
+  "2304.03442": {
+    "paperType": "Method",
+    "topics": [
+      "Memory Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Memory Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Episodic Memory & Planning；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Memory Stream 和 Reflection 保留并参与后续行为；证据关注角色连贯性与可信度。固定的 Retrieval、Reflection 与 Planning 程序未被重新编写。",
+        "feedback": "模拟环境观察、互动记录及 model 对 memory 重要性与高层关系的判断。",
+        "scope": "人物背景、模拟环境及 memory 与 reflection 规则由研究者设定，评价目标偏向可信度。即使角色能形成新关系或抽象认识，也不能从文字上像学习的行为推断 foundation model weights 改变或得到可靠因果知识。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2304.03442v2"
+      }
+    ]
+  },
+  "2310.10134": {
+    "paperType": "Method",
+    "topics": [
+      "Memory Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Memory Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Held-out Transfer"
+        ],
+        "boundary": "Cross-Trial Experience & Causal Memory；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "文本中的经验规则与 Meta-Memory 保留到不同 Trial、Task 或 Environment，支持适应和迁移；固定 Memory Generator 不因生成了新规则就自动成为已进化的 Improver。",
+        "feedback": "模拟器动作观察、最终任务 reward 转成的文字 feedback，以及以往试次 memory。",
+        "scope": "因果抽象由 language model 根据有限轨迹生成，并非通过严格干预实验识别的因果规律。控制器、executor 和 generator 均冻结；环境还提供可行动作信息，所以表现包含模拟器接口对 search 空间的帮助。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2310.10134v1"
+      }
+    ]
+  },
+  "2405.15793": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Software Engineering Interfaces & Tools；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "本实验由研究者设计与消融 ACI，Agent 修改的是任务仓库。没有展示持久的 Agent 自更新；收录为相关接口研究，可从 All Papers 与 Method 找到。",
+        "feedback": "仓库 search 结果、编辑后的内容、语法检查、代码执行与测试输出。",
+        "scope": "接口来自人工行为分析和配置 search，运行中的 Agent 没有自动演化自身工具。它修改的是目标仓库，foundation model 也冻结。因此代码修改、execution feedback 与高分修复本身，均不足以构成 Recursive Self-Improvement。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2405.15793v3"
+      }
+    ]
+  },
+  "2406.04824": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Held-out Transfer"
+        ],
+        "boundary": "External Optimization Algorithm Code；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "被搜索的 acquisition function 属于目标 Bayesian Optimizer；固定 FunSearch 系统的后继生成策略没有因此被证明自更新。",
+        "feedback": "候选 acquisition function 执行后，在 objective function 上的优化成绩及 validation set 选择结果。",
+        "scope": "输入输出形式、objective function 集合、评价过程与 search 框架由研究者指定，搜到的是外部 Bayesian optimization 组件。发现一个更好的 acquisition function，不等于负责发现它的 Agent 变强，也不提供持续 recursive optimization 的证据。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2406.04824v2"
+      }
+    ]
+  },
+  "2210.03629": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Reasoning & Acting Workflow；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "交错 reasoning 与 action 是执行方式；原方法不提交跨任务 Agent 配置更新。",
+        "feedback": "任务接口返回的检索内容、环境状态及动作结果。",
+        "scope": "核心 prompt 范式没有持久学习模块，也不要求修改 model parameters、prompt optimization 器或自身代码。论文另有初步 fine-tuning 实验，但不能因此把主方法的每次观察都说成参数学习，或把任务内重规划称为 Recursive Self-Improvement。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2210.03629v3"
+      }
+    ]
+  },
+  "2305.11738": {
+    "paperType": "Method",
+    "topics": [],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Current Response & Generated Code；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "工具用于核验并修订当前答案。固定 Model、工具和 Critique Procedure 没有持久更新；Ephemeral 说明产物生命周期，而非反馈来源。",
+        "feedback": "任务相关检索、代码执行或评价接口输出，以及 model 据此形成的批评。",
+        "scope": "工具能够提供证据，但检索内容或自动评价也会有误差；实现中的工具选择由研究者按任务配置。无参数更新且没有跨任务经验保存，因此不能从迭代次数增加推断长期学习，更不能推断无界 self-improvement。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2305.11738v4"
+      }
+    ]
+  },
+  "2410.04444": {
+    "paperType": "Method",
+    "topics": [
+      "Architecture Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Architecture Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Proposer",
+          "Integrator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Policy Code & Self-Improvement Algorithm；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "运行时自检与动态修改可以替换后续执行的 Agent 逻辑，包括控制过程。按可核验程序范围记录 Recursive Reuse，不将经验验证写成形式化效用证明。",
+        "feedback": "任务 validation set 效用、环境交互结果与代码执行错误。",
+        "scope": "名称源自 Gödel machine，但这里的修改由 language model 与经验评价驱动，不能直接继承形式证明式最优保证。初始目标、model 接口、评价任务及运行资源仍有外部设定，自由配置与受约束配置也不能混比。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2410.04444v4"
+      }
+    ]
+  },
+  "2402.17574": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Persistent Policy Prompts & World Beliefs；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "Policy-level Reflection 更新 Behavioral Guideline 等 Prompt 内容，影响后续对局；Belief 与 DFS 框架本身固定，未展示 Architecture Code 的自动改写。",
+        "feedback": "完整博弈轨迹、终局信息、玩家得分及相同条件重放的收益。",
+        "scope": "prompt 更新与候选 search 框架由设计者固定，foundation model 没有 gradient 训练。牌局收益受到对手与随机性影响，不能仅凭一次高收益认定 policy 更优；world belief 也只是 model 的可修订假设，并非真实隐藏状态。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2402.17574v3"
+      }
+    ]
+  },
+  "2212.10560": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Training Data & Model Weights；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "合成数据用于 Fine-Tuning Solver，训练后的 Weights 保留。主 Pipeline 未让这个新 Solver 反复接管数据生成，因此不标记 Recursive Reuse。",
+        "feedback": "人工种子任务确定初始范围；synthetic data 经过相似度、重复与格式筛选，最终答案作为 supervised fine-tuning 目标。",
+        "scope": "方法仍依赖人工种子任务及 pre-training 知识，启发式去重也不等于事实验证。正文主要展示数据池扩展后对原 model 的 fine-tuning，没有证明更新后的 model 反复接管数据生成后，能力还能跨多个训练循环持续增长。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2212.10560v2"
+      }
+    ]
+  },
+  "2212.08073": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator",
+          "Evaluator"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Model Weights & Preference Model；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "SL 修订与 RLAIF 更新助手及 Preference Model，但 Constitution 与阶段设计固定。这里的训练阶段连接不等于已测得跨代 Improver 持续自改进。",
+        "feedback": "人写原则指导 self-critique 与 AI 有害性偏好；有用性仍包含人类 feedback；preference model 把比较标签转为 reinforcement learning reward。",
+        "scope": "原则由人制定，有用性训练仍用人工标签，feedback model 也不等同于完全独立的真值来源。原则冲突、feedback 偏差及 reward overfitting 都会影响结果；无害性提升不能直接当作通用 reasoning 能力提升，更不能当作通过 recursion 获得开放式增长。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2212.08073v1"
+      }
+    ]
+  },
+  "2308.08998": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Model Weights & Sampled Data；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "更新后的 Policy 在新的 Grow 阶段生成训练样本，构成 Generator 的 Recursive Reuse。固定 Reward 与 Grow / Improve 算法不影响这一局部机制判定，但没有 Controlled Successor Gain 证据。",
+        "feedback": "reward model 为自生成候选打分；递增阈值选择训练数据，人工评价用于独立检查自动 reward 与真实偏好是否一致。",
+        "scope": "实验依赖机器翻译领域已有的 reward model，任务覆盖有限。固定 reward 作为人类偏好的代理会被反复优化所放大，候选探索范围又受当前 policy 约束；reward 阈值越严格，也不意味着留下的数据覆盖越全面。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2308.08998v2"
+      }
+    ]
+  },
+  "2401.01335": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Model Weights；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "上一轮 Policy 生成下一轮对照样本，Model 同时承担 Solver 与 Experience Generator。固定示范分布和 Loss 是外部锚点；反馈复用不足以证明通用改进能力持续增长。",
+        "feedback": "固定人工示范构成正例；上一轮 model 回答构成动态对照；contrastive learning 更新 model，随后以新 model 替换对手。",
+        "scope": "无需新增标注并不等于无需人工数据：高质量示范始终是正例和目标来源。理论结论依赖设定及可优化性，有限数据与 model 容量会限制提升；把生成回答统一当作对照，也可能忽略优于示范的候选。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2401.01335v3"
+      }
+    ]
+  },
+  "2403.09629": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Rationale Policy Training",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator"
+        ],
+        "persistence": "Across Training Updates",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Model Weights & Reasoning Policy；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "训练中更新的 Rationale Policy 继续为后续训练生成 Thought，属于 Training-update 尺度的 Generator 反馈复用。该判断描述数据依赖，未证明训练算法自修改或更好的通用 Improver。",
+        "feedback": "真实后续文本的 log-likelihood 衡量自生成 reasoning 的帮助，policy gradient 据此更新 reasoning 生成相关参数。",
+        "scope": "预测后文更好不等于中间解释在逻辑上真实，model 仍以外部文本提供的信号学习。并行采样与额外 reasoning 增加计算需求；实验不表明系统能创造新训练算法，也不证明持续扩大 reasoning 长度会获得无界改进。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2403.09629v2"
+      }
+    ]
+  },
+  "2407.18219": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Iterative Training",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Model Weights & Multi-Turn Refinement Policy；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "训练阶段用当前 Policy 的 Rollout 构造后续训练数据，更新版本重新参与经验生成。部署阶段的单题修订另列 Variant，避免将训练的 Persistence 与测试时 Oracle 权限混合。",
+        "feedback": "训练时使用答案正确性 reward 和轨迹中的失败历史；改进示范可来自自采样选优或更强 model，部署可选择是否调用 checker。",
+        "scope": "训练依赖题目与正确性信号，改进回答还可能来自更强 model，因此不能笼统称为完全无 external feedback。标题中的 Recursive 指多轮内省；inference-time 通常修订 context 里的回答，并未在每轮自主修改 model 训练算法。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2407.18219v2"
+      },
+      {
+        "name": "Deployment · With Oracle",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "One deployment problem; fixed trained Model",
+        "rationale": "此 Variant 描述部署时单题修订；它不提交跨任务状态更新。训练得到的 Policy 已固定，不能将训练闭环的持久性沿用到这里。",
+        "feedback": "每轮可查询答案正确性并在答对后停止。",
+        "scope": "训练依赖题目与正确性信号，改进回答还可能来自更强 model，因此不能笼统称为完全无 external feedback。标题中的 Recursive 指多轮内省；inference-time 通常修订 context 里的回答，并未在每轮自主修改 model 训练算法。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2407.18219v2"
+      },
+      {
+        "name": "Deployment · Without Oracle",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "One deployment problem; fixed trained Model",
+        "rationale": "此 Variant 描述部署时单题修订；它不提交跨任务状态更新。训练得到的 Policy 已固定，不能将训练闭环的持久性沿用到这里。",
+        "feedback": "不查询答案 Checker；强制重试并对跨轮答案做 Majority Vote。",
+        "scope": "训练依赖题目与正确性信号，改进回答还可能来自更强 model，因此不能笼统称为完全无 external feedback。标题中的 Recursive 指多轮内省；inference-time 通常修订 context 里的回答，并未在每轮自主修改 model 训练算法。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2407.18219v2"
+      }
+    ]
+  },
+  "2408.02666": {
+    "paperType": "Method",
+    "topics": [
+      "Model Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Iterative Judge Training",
+        "targets": [
+          "Model Evolution"
+        ],
+        "roles": [
+          "Evaluator",
+          "Experience Generator"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Improver Quality Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Judge Model Weights；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "当前 Judge 为下一轮产生 Judgment Trajectories，筛选后从 Seed Model 训练新版；新版再次承担标注，构成局部 Recursive Reuse。构造回答对的 Model 与外层过滤规则固定；Judge Accuracy 增益尚非 Controlled Successor Gain。",
+        "feedback": "回答对的预设合成优劣关系校验 model 判断；与预设关系一致的理由和标签成为下一轮监督训练数据。",
+        "scope": "无需人工偏好标签不等于无需人工来源的 instruction，也不等于每个合成优劣关系都可靠。扰动可能改变任务而非单纯降低质量，筛选还会继承初始 judge 偏差；固定 benchmark 提升不保证对新 model 或新错误类型同样有效。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2408.02666v2"
+      }
+    ]
+  },
+  "2309.16797": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Main Method",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver",
+          "Proposer"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Demonstrated",
+        "evidence": [
+          "Task Gain",
+          "Recursive Reuse"
+        ],
+        "boundary": "Task Prompts & Prompt-Improvement Strategy；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "完整方法更新 Task Prompts 和 Mutation Prompts；后者实际参与下一轮提案。Task-Prompt-only 消融不具有同样的改进操作更新。",
+        "feedback": "带答案的任务训练集提供 fitness；population selection 保留优胜个体；mutation prompt 被更新后继续控制下一轮 prompt 生成。",
+        "scope": "fitness 来自带答案的训练任务，base language model、外层选择算法和 hypermutation 机制仍固定。可编辑对象主要是 prompt 文本，结果受任务分布与评估预算制约；这里的 self-modification 范围不能延伸为完整系统任意重写和无界进步。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2309.16797v1"
+      },
+      {
+        "name": "Task-Prompt-only Ablation",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Improvement Rounds",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Task Prompts & Prompt-Improvement Strategy",
+        "rationale": "只演化任务指令的对照用于检验 Meta-Mutation 作用，不沿用完整方法的 Improver 更新结论。",
+        "feedback": "带答案的任务训练集提供 fitness；population selection 保留优胜个体；mutation prompt 被更新后继续控制下一轮 prompt 生成。",
+        "scope": "fitness 来自带答案的训练任务，base language model、外层选择算法和 hypermutation 机制仍固定。可编辑对象主要是 prompt 文本，结果受任务分布与评估预算制约；这里的 self-modification 范围不能延伸为完整系统任意重写和无界进步。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2309.16797v1"
+      }
+    ]
+  },
+  "2406.07496": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Instance Optimization",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Prompts, Code & External Design Variables；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "优化当前 answer、program 或其他产物；没有据此更新 TextGrad 自身。",
+        "feedback": "Task-specific critique, execution or domain evaluation",
+        "scope": "方法依赖 model 提供可靠的语义归因，没有真实 gradient 或收敛保证。分子相关结果主要来自计算评价，外部科学设计不能仅凭代理分数证明真实效果；foundation model 和文本优化流程也没有在实验中自主重写。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2406.07496v1"
+      },
+      {
+        "name": "Prompt Optimization",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Solver system prompt; fixed gradient engine",
+        "rationale": "Prompt 跨样本保留；外部 gradient engine 固定，没有展示 evolved TextGrad optimizer。",
+        "feedback": "External Model and task loss",
+        "scope": "方法依赖 model 提供可靠的语义归因，没有真实 gradient 或收敛保证。分子相关结果主要来自计算评价，外部科学设计不能仅凭代理分数证明真实效果；foundation model 和文本优化流程也没有在实验中自主重写。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2406.07496v1"
+      }
+    ]
+  },
+  "2309.03409": {
+    "paperType": "Method",
+    "topics": [
+      "Prompt & Context Evolution"
+    ],
+    "reviewedAt": "2026-09-13",
+    "assessment": "Editorial Inference",
+    "variants": [
+      {
+        "name": "Reusable Prompt Optimization",
+        "targets": [
+          "Prompt & Context Evolution"
+        ],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Across Tasks",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Task Prompts & Candidate History；以该论文实际可更新组件为边界，固定部分见下方判定。",
+        "rationale": "可复用任务 Prompt 被更新，外部 Optimizer LLM 与候选生成规则固定；附带的数值与路线搜索属于外部 Artifact Optimization，另列 Variant。",
+        "feedback": "目标 model 在带答案训练样本上的准确率为候选评分；候选 prompt 与分数写入 meta-prompt，驱动下一轮生成。",
+        "scope": "训练样本及可计算评分是必要外部信号，反复选择也可能 overfitting 小型训练集。context 预算限制可利用的历史，foundation model 与元优化流程固定；外部数学问题的解变好与部署系统的长期能力改进需分别记录。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2309.03409v3"
+      },
+      {
+        "name": "Mathematical Optimization Examples",
+        "targets": [],
+        "roles": [
+          "Solver"
+        ],
+        "persistence": "Ephemeral",
+        "recursiveReuse": "Not Demonstrated",
+        "evidence": [
+          "Task Gain"
+        ],
+        "boundary": "Candidate regression coefficients or TSP route",
+        "rationale": "更新外部数值或路线候选；搜索历史留在当前优化问题中，未提交跨问题 Optimizer 更新。",
+        "feedback": "目标 model 在带答案训练样本上的准确率为候选评分；候选 prompt 与分数写入 meta-prompt，驱动下一轮生成。",
+        "scope": "训练样本及可计算评分是必要外部信号，反复选择也可能 overfitting 小型训练集。context 预算限制可利用的历史，foundation model 与元优化流程固定；外部数学问题的解变好与部署系统的长期能力改进需分别记录。 已核验固定版本的相关方法与主要结果；未独立复现。",
+        "source": "https://arxiv.org/html/2309.03409v3"
+      }
+    ]
+  }
+}

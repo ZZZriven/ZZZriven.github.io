@@ -22,6 +22,27 @@
     ],
     "Surveys & Frameworks": [
       "综述与框架"
+    ],
+    "Model Evolution": [
+      "模型演化",
+      "模型更新",
+      "权重"
+    ],
+    "Prompt & Context Evolution": [
+      "提示词",
+      "上下文演化"
+    ],
+    "Memory Evolution": [
+      "记忆演化",
+      "长期记忆"
+    ],
+    "Tool & Skill Evolution": [
+      "工具演化",
+      "技能演化"
+    ],
+    "Architecture Evolution": [
+      "架构演化",
+      "工作流"
     ]
   },
   "terms": {

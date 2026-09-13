@@ -2,8 +2,9 @@
 import { useEffect, useMemo, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { ArrowDown, ArrowLeft, ArrowRight, ArrowUpRight, Search, Shuffle, X } from 'lucide-react';
+import { Methodology } from '@/components/rsi/methodology';
 import { ArxivInbox } from '@/components/rsi/arxiv-inbox';
-import { normalizeCategory, papers, categories, categoryDescriptions, modes, filterPapers, formatDate, collectionUpdated, modeLabel } from '@/lib/papers';
+import { normalizeCategory, papers, categories, categoryDescriptions, paperTypes, loopRoles, evidenceTypes, retentionTypes, initialFilters, matchesCategory, type PaperFilters, filterPapers, formatDate, collectionUpdated } from '@/lib/papers';
 
 const readingPaths = [
   {title: 'From Feedback to Continual Learning', description: '先理解一次回答如何被修订，再看 experience 和 model parameters 如何进入下一轮。', ids: ['2303.17651', '2303.11366', '2203.14465']},
@@ -13,16 +14,19 @@ const readingPaths = [
 
 const sorts = [{value: 'newest', label: '首次提交 · 最新优先'}, {value: 'oldest', label: '首次提交 · 最早优先'}, {value: 'updated', label: '已核实版本 · 最新优先'}];
 const pageSize = 12;
-type Filters = {query: string; category: string; sort: string; mode: string; page: number};
-const initial: Filters = {query: '', category: 'All Papers', sort: 'newest', mode: 'all', page: 1};
+type Filters = PaperFilters;
+const initial = initialFilters;
+const axes = [{key:'type',label:'Paper Type',values:paperTypes},{key:'role',label:'Loop Role',values:loopRoles},{key:'evidence',label:'Evidence',values:evidenceTypes},{key:'retention',label:'Persistence',values:retentionTypes}] as const;
+const legacyModes = ['all','refinement','persistent','recursive','enabling','foundation'];
 type ModelContext = {registerTool: (tool: {name: string; title: string; description: string; inputSchema: object; annotations: object; execute: (input: unknown) => unknown}, options: {signal: AbortSignal}) => void | Promise<void>};
 function readFilters(): Filters {
   const params = new URLSearchParams(window.location.search);
   const requestedPage = Number(params.get('page') ?? 1);
-  const filters = {query: (params.get('q') ?? '').slice(0, 300), category: normalizeCategory(params.get('category')),
-    mode: modes.find(m => m.value === params.get('mode'))?.value ?? initial.mode, sort: sorts.find(s => s.value === params.get('sort'))?.value ?? initial.sort,
+  const filters:Filters = {...initial, query: (params.get('q') ?? '').slice(0, 300), category: normalizeCategory(params.get('category')),
+    mode: legacyModes.find(m => m === params.get('mode')) ?? initial.mode, sort: sorts.find(s => s.value === params.get('sort'))?.value ?? initial.sort,
     page: Number.isSafeInteger(requestedPage) && requestedPage > 0 ? requestedPage : 1};
-  filters.page = Math.min(filters.page, Math.max(1, Math.ceil(filterPapers(filters.query, filters.category, filters.sort, filters.mode).length / pageSize)));
+  for (const axis of axes) filters[axis.key] = axis.values.find(v => v === params.get(axis.key)) ?? initial[axis.key];
+  filters.page = Math.min(filters.page, Math.max(1, Math.ceil(filterPapers(filters).length / pageSize)));
   return filters;
 }
 function writeFilters(filters: Filters) {
@@ -36,10 +40,10 @@ function writeFilters(filters: Filters) {
 export function Library() {
   const [filters, setFilters] = useState<Filters>(initial);
   const {query, category, mode, sort, page} = filters;
-  const filtered = useMemo(() => filterPapers(query, category, sort, mode), [query, category, sort, mode]);
+  const filtered = useMemo(() => filterPapers(filters), [filters]);
   const pageCount = Math.max(1, Math.ceil(filtered.length / pageSize));
   const visible = filtered.slice((page - 1) * pageSize, page * pageSize);
-  const active = query !== '' || category !== initial.category || mode !== initial.mode || sort !== initial.sort;
+  const active = Object.entries(filters).some(([key,value]) => key !== 'page' && value !== initial[key as keyof Filters]);
   function update(values: Partial<Filters>) {const next = {...filters, page: 1, ...values}; setFilters(next); writeFilters(next);}
   function turnPage(nextPage: number) {
     update({page: nextPage});
@@ -58,8 +62,8 @@ export function Library() {
     const lifecycle = new AbortController();
     const tool = {
       name: 'search_papers', title: '搜索 RSI 论文',
-      description: '按关键词、研究分类和 RSI 关联类型搜索论文，并更新页面中的筛选与结果。',
-      inputSchema: {type: 'object', properties: {query: {type: 'string', maxLength: 300}, category: {type: 'string', enum: [...categories]}, mode: {type: 'string', enum: modes.map(m => m.value)}, sort: {type: 'string', enum: sorts.map(s => s.value)}, page: {type: 'integer', minimum: 1}}, additionalProperties: false},
+      description: '按关键词、Evolution Target、Paper Type、Loop Role、Evidence 和 Persistence 搜索；跨轴条件必须匹配同一个 Variant。',
+      inputSchema: {type: 'object', properties: {query: {type: 'string', maxLength: 300}, category: {type: 'string', enum: [...categories]}, ...Object.fromEntries(axes.map(a => [a.key,{type:'string',enum:a.values}])), sort: {type: 'string', enum: sorts.map(s => s.value)}, page: {type: 'integer', minimum: 1}}, additionalProperties: false},
       annotations: {readOnlyHint: false, untrustedContentHint: false},
       execute(input: unknown) {
         if (!input || typeof input !== 'object' || Array.isArray(input)) throw new Error('输入必须是对象');
@@ -67,14 +71,15 @@ export function Library() {
         if (Object.keys(args).some(k => !Object.keys(initial).includes(k))) throw new Error('不支持的参数');
         if (args.query !== undefined && (typeof args.query !== 'string' || args.query.length > 300)) throw new Error('搜索词必须是最多 300 字符的文本');
         if (args.category !== undefined && !categories.some(c => c === args.category)) throw new Error('无效分类');
-        if (args.mode !== undefined && !modes.some(m => m.value === args.mode)) throw new Error('无效关联类型');
+        if (args.mode !== undefined) throw new Error('mode 仅用于兼容旧链接；请使用独立分类轴');
+        for (const axis of axes) if (args[axis.key] !== undefined && !axis.values.includes(args[axis.key]!)) throw new Error('无效 ' + axis.label);
         if (args.sort !== undefined && !sorts.some(s => s.value === args.sort)) throw new Error('无效排序');
         if (args.page !== undefined && (!Number.isSafeInteger(args.page) || args.page < 1)) throw new Error('页码必须是正整数');
         const next = {...initial, ...args};
-        const matches = filterPapers(next.query, next.category, next.sort, next.mode);
+        const matches = filterPapers(next);
         next.page = Math.min(next.page, Math.max(1, Math.ceil(matches.length / pageSize)));
         flushSync(() => setFilters(next)); writeFilters(next);
-        return {...next, count: matches.length, papers: matches.map(p => ({id: p.id, title: p.title, category: p.category, mode: p.mode, url: '/rsi/papers/' + p.id + '/', date: p.date}))};
+        return {...next, count: matches.length, papers: matches.map(p => ({id: p.id, title: p.en, topics: p.taxonomy.topics, paperType: p.taxonomy.paperType, variants: p.taxonomy.variants, url: '/rsi/papers/' + p.id + '/', date: p.date}))};
       },
     };
     try {Promise.resolve(context.registerTool(tool, {signal: lifecycle.signal})).catch(() => {});} catch {}
@@ -99,23 +104,19 @@ export function Library() {
         <p className="recursive-note">再进一步，改进产生改进的机制。<br/><span>Persistent update 与 recursive improvement，需要分别验证。</span></p>
       </div>
     </header>
-    <div className="collection-strip"><div><strong>{papers.length}</strong><span>篇论文解析</span></div><div><strong>{String(categories.length - 1).padStart(2, '0')}</strong><span>个研究方向</span></div><div className="collection-note"><span className="live-dot"/><span>Explore Self-Improvement</span></div><p>最近整理 <time dateTime={collectionUpdated}>{formatDate(collectionUpdated)}</time></p></div>
+    <div className="collection-strip"><div><strong>{papers.length}</strong><span>篇论文解析</span></div><div><strong>{String(categories.length - 1).padStart(2, '0')}</strong><span>个 Evolution Targets</span></div><div className="collection-note"><span className="live-dot"/><span>Explore Self-Improvement</span></div><p>最近整理 <time dateTime={collectionUpdated}>{formatDate(collectionUpdated)}</time></p></div>
     <section id="library" className="library-section" aria-labelledby="library-title">
-      <aside className="category-sidebar"><p className="overline">EXPLORE BY TOPIC</p><h2 id="library-title">Research Topics</h2><nav aria-label="按研究方向筛选">{categories.map((c, i) => <button type="button" aria-pressed={category === c} key={c} onClick={() => update({category: c})}><span className="category-number">{i === 0 ? '＋' : String(i).padStart(2, '0')}</span><span>{c}</span><small>{c === 'All Papers' ? papers.length : papers.filter(p => p.category === c).length}</small></button>)}</nav><a href="#methodology" className="taxonomy-shortcut">这些分类意味着什么？ <ArrowUpRight size={14}/></a><p className="sidebar-note">按主要研究问题归类，结合系统更新方式阅读；跨方向工作用关键词补充定位。</p></aside>
-      <div className="library-content"><div className="library-heading"><div><p className="overline">PAPER COLLECTION</p><h2 id="collection-title" tabIndex={-1}>{category}</h2></div><button className="random-button" type="button" onClick={randomPaper} disabled={!filtered.length}><Shuffle size={16}/><span>随机一篇</span></button></div><p className="category-description">{categoryDescriptions[category]}</p>
+      <aside className="category-sidebar"><p className="overline">EXPLORE BY UPDATE TARGET</p><h2 id="library-title">Evolution Targets</h2><nav aria-label="按研究方向筛选">{categories.map((c, i) => <button type="button" aria-pressed={category === c} key={c} onClick={() => update({category: c})}><span className="category-number">{i === 0 ? '＋' : String(i).padStart(2, '0')}</span><span>{c}</span><small>{c === 'All Papers' ? papers.length : papers.filter(p => matchesCategory(p,c)).length}</small></button>)}</nav><a href="#methodology" className="taxonomy-shortcut">这些分类意味着什么？ <ArrowUpRight size={14}/></a><p className="sidebar-note">同一论文可涉及多个 Target，各主题数量不可相加。Survey 的标签表示覆盖范围，具体实验的更新对象在 Variant 中说明。</p></aside>
+      <div className="library-content"><div className="library-heading"><div><p className="overline">PAPER COLLECTION</p><h2 id="collection-title" tabIndex={-1}>{category}</h2></div><button className="random-button" type="button" onClick={randomPaper} disabled={!filtered.length}><Shuffle size={16}/><span>随机一篇</span></button></div><p className="category-description">{categoryDescriptions[category] ?? '当前链接保留旧分类筛选结果。选择左侧 Evolution Target 即可切换到新版分类。'}</p>
         <div className="rsi-search"><Search size={18}/><input type="search" aria-label="搜索论文、作者或关键词" placeholder="搜索论文、作者、关键词或解析内容…" value={query} maxLength={300} onChange={e => update({query: e.target.value})}/>{query && <button type="button" aria-label="清空搜索" onClick={() => update({query: ''})}><X size={16}/></button>}<kbd aria-hidden="true">⌕</kbd></div>
-        <div className="filter-row"><label><span>RSI Relation</span><select aria-label="RSI 关联类型" value={mode} onChange={e => update({mode: e.target.value})}>{modes.map(m => <option key={m.value} value={m.value}>{m.label}</option>)}</select></label><label><span className="sr-only">论文排序</span><select aria-label="论文排序" value={sort} onChange={e => update({sort: e.target.value})}>{sorts.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}</select></label></div>
-        <output className="rsi-result-count" aria-live="polite"><span>找到 <strong>{filtered.length}</strong> 篇论文{filtered.length > 0 && <span className="visible-range"> / 本页 {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, filtered.length)}</span>}</span>{active && <button type="button" onClick={reset}>重置筛选 <X size={12}/></button>}<span className="result-hint">每篇均附结构化解析</span></output>
-        <div id="papers" className="rsi-paper-list">{filtered.length ? visible.map((p, index) => <article className="rsi-paper" key={p.id}><a className="paper-link" href={'/rsi/papers/' + p.id + '/'} aria-labelledby={'paper-' + p.id}><span className="paper-index" aria-hidden="true">{String((page - 1) * pageSize + index + 1).padStart(2, '0')}</span><div className="paper-body"><div className="paper-meta"><span className="category-tag">{p.category}</span><span className={'mode-tag mode-' + p.mode}>{modeLabel(p.mode)}</span><time dateTime={p.date}>{formatDate(p.date)}</time></div><h3 id={'paper-' + p.id}>{p.en}</h3><p className="paper-english">{p.title}</p><p className="paper-summary">{p.summary}</p><div className="paper-foot"><div className="paper-tags">{p.keywords.slice(0, 3).map(k => <span key={k}>{k}</span>)}</div><span className="paper-read">阅读解析 <ArrowUpRight size={14}/></span></div></div></a></article>) : <div className="rsi-empty"><Search size={28}/><h3>没有找到匹配的论文</h3><p>试试更短的关键词，或清除分类与关联类型。</p><button className="rsi-button" type="button" onClick={reset}>重置筛选</button></div>}</div>
+        <div className="axis-filters">{axes.map(axis => <label key={axis.key}><span>{axis.label}</span><select aria-label={axis.label} value={filters[axis.key]} onChange={e => update({[axis.key]:e.target.value})}>{axis.values.map(v => <option key={v} value={v}>{v}</option>)}</select></label>)}</div>{mode !== 'all' && <p className="legacy-filter">旧链接筛选仍生效：{mode} <button type="button" onClick={() => update({mode:'all'})}>移除旧筛选</button></p>}<div className="filter-row"><span className="filter-explanation">跨轴筛选匹配同一个 Variant</span><label><span className="sr-only">论文排序</span><select aria-label="论文排序" value={sort} onChange={e => update({sort: e.target.value})}>{sorts.map(s => <option key={s.value} value={s.value}>{s.label}</option>)}</select></label></div>
+        <output className="rsi-result-count" aria-live="polite"><span>找到 <strong>{filtered.length}</strong> 篇论文{filtered.length > 0 && <span className="visible-range"> / 本页 {(page - 1) * pageSize + 1}–{Math.min(page * pageSize, filtered.length)}</span>}</span>{active && <button type="button" onClick={reset}>重置筛选 <X size={12}/></button>}<span className="result-hint">12 个问题，逐层理解论文</span></output>
+        <div id="papers" className="rsi-paper-list">{filtered.length ? visible.map((p, index) => <article className="rsi-paper" key={p.id}><a className="paper-link" href={'/rsi/papers/' + p.id + '/'} aria-labelledby={'paper-' + p.id}><span className="paper-index" aria-hidden="true">{String((page - 1) * pageSize + index + 1).padStart(2, '0')}</span><div className="paper-body"><div className="paper-meta"><span className="category-tag">{p.taxonomy.paperType}</span>{p.taxonomy.topics.slice(0,2).map(t => <span className="topic-tag" key={t}>{t}</span>)}<time dateTime={p.date}>{formatDate(p.date)}</time></div><h3 id={'paper-' + p.id}>{p.en}</h3><p className="paper-english">{p.title}</p><p className="paper-summary">{p.summary}</p><div className="paper-foot"><div className="paper-tags">{p.keywords.slice(0, 3).map(k => <span key={k}>{k}</span>)}</div><span className="paper-read">阅读解析 <ArrowUpRight size={14}/></span></div></div></a></article>) : <div className="rsi-empty"><Search size={28}/><h3>没有找到匹配的论文</h3><p>试试更短的关键词，或减少分类条件。</p><button className="rsi-button" type="button" onClick={reset}>重置筛选</button></div>}</div>
         {pageCount > 1 ? <nav className="paper-pagination" aria-label="论文分页"><span>第 {page} / {pageCount} 页</span><div><button type="button" aria-label="上一页" onClick={() => turnPage(page - 1)} disabled={page === 1}><ArrowLeft size={16}/></button>{Array.from({length: pageCount}, (_, i) => <button type="button" key={i} aria-label={'第 ' + (i + 1) + ' 页'} aria-current={page === i + 1 ? 'page' : undefined} onClick={() => turnPage(i + 1)}>{String(i + 1).padStart(2, '0')}</button>)}<button type="button" aria-label="下一页" onClick={() => turnPage(page + 1)} disabled={page === pageCount}><ArrowRight size={16}/></button></div></nav> : <div className="index-end">{filtered.length ? '已显示全部 ' + filtered.length + ' 篇论文' : '从另一个问题出发，继续探索。'}</div>}
       </div>
     </section>
     <ArxivInbox/>
-    <section id="methodology" className="methodology-section"><div className="section-heading"><div><p className="overline">HOW TO READ THE FIELD</p><h2>先辨清，什么在改进。</h2></div><span className="section-index">01 / METHODOLOGY</span></div><p className="section-intro">以 Research Problem 划分七个研究方向，再以 RSI Relation 独立标注系统更新方式。分类同时覆盖具体方法、相关能力、外部产物优化，以及 survey、theory 与 evaluation；不把所有改进都视为 Recursive Self-Improvement。</p>
-      <div className="method-grid"><article><span className="method-index">01</span><h3>Improvement Target</h3><p>先定位论文的核心问题：output、memory、model、Agent，还是 search 与 discovery。以 evaluation 或 survey 为主要贡献的论文，分别归入对应研究方向。</p></article><article><span className="method-index">02</span><h3>Update Mechanism</h3><p>明确被优化的系统边界：变更是否保留？是固定 optimizer 更新目标系统，还是更新后的 improver 接手下一轮？外部 artifact 变好需单独说明。</p></article><article><span className="method-index">03</span><h3>Evidence Scope</h3><p>结合 independent evaluation、transfer、iteration 数量与 compute cost 读结果。任务分数提高，不能直接推出 open-ended Recursive Self-Improvement。</p></article></div>
-      <div className="mode-explainer"><div><span className="mode-tag mode-refinement">Output Refinement</span><p>改写当前任务输出，不保留系统更新。</p></div><div><span className="mode-tag mode-persistent">Persistent System Improvement</span><p>weights、prompt、memory 或 code 进入后续尝试或任务；optimizer 可以固定。</p></div><div><span className="mode-tag mode-recursive">Improver Self-Modification</span><p>显式改写承担后续改进的程序或 strategy，并由改后版本继续改进。</p></div><div><span className="mode-tag mode-enabling">Enabling Methods & Artifacts</span><p>主要研究相关能力或外部产物优化；混合实验逐篇说明系统更新范围。</p></div><div><span className="mode-tag mode-foundation">Surveys, Theory & Evaluation</span><p>用于组织 taxonomy、建立 theory、开展 evaluation 或分析 limitations。</p></div></div>
-      <p className="classification-note">主标签概括论文的主要贡献，混合实验的更新方式在解析中分别说明。这些标签不是能力排名。标题中的 “self-improving” 或 “recursive” 本身不构成分类证据；每篇解析说明 target、feedback 和 update scope。model 与 reward model 共同训练归入 Persistent System Improvement，不能仅据此认定 improver 已 self-modify。</p>
-    </section>
+    <Methodology/>
     <section id="resources" className="resources-section"><div className="section-heading"><div><p className="overline">READING PATHS</p><h2>沿着问题，深入研究。</h2></div><span className="section-index">02 / READING PATHS</span></div><p className="section-intro">从代表论文开始，逐步比较 Method、适用范围与 Evidence。每篇解析附 arXiv 原文和实际核验范围。</p><div className="reading-paths">{readingPaths.map((path, index) => <article key={path.title}><span className="resource-kind">路径 0{index + 1}</span><h3>{path.title}</h3><p>{path.description}</p><ol>{path.ids.map(id => papers.find(p => p.id === id)).filter(p => p !== undefined).map(p => <li key={p.id}><a href={'/rsi/papers/' + p.id + '/'}>{p.en}<ArrowUpRight size={14}/></a></li>)}</ol></article>)}</div></section>
   </main>;
 }

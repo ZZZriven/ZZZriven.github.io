@@ -1,6 +1,6 @@
 # Daily arXiv discovery
 
-RSI Paper keeps curated notes in `content/papers.json` and automatically discovered metadata in `content/arxiv-feed.json`. The feed contains original titles, abstracts, versioned arXiv links, and provisional research topics. It never invents paper analysis or labels a title match as evidence of recursive capability.
+RSI Paper keeps curated metadata in `content/papers.json`, reviewed variant classifications in `content/taxonomy.json`, twelve-part analyses in `content/deep-notes.json` and automatically discovered metadata in `content/arxiv-feed.json`. The feed contains original titles, abstracts, versioned arXiv links, and provisional research topics. It never invents paper analysis or labels a title match as evidence of recursive capability.
 
 Run from the repository root:
 
@@ -19,9 +19,11 @@ Each scheduled run synchronizes the clean checkout, runs the collector, checks t
 
 ## From discovery to a research note
 
-Review the original paper before promoting a feed item into `content/papers.json`. Preserve the English original title and technical terminology, using `content/terminology.json` as the canonical glossary; retain Chinese explanatory prose. Supply Research Problem, Insight, Observation, Method, Results, Limitations, Relation to RSI, and Outlook, with precise sources and the actual verification scope. Separate editorial interpretation from paper observations. Pin the reviewed arXiv version and date; do not silently update an existing note to a revision that has not been reviewed.
+Read `PAPER_READING_GUIDE.md` and `TAXONOMY.md` before promotion. Review the original fixed-version paper and add consistent records to all three curated files. Every curated paper requires all twelve analysis sections and the four information kinds: Paper Claim, Prior Work, Inference, Hypothesis. Research current related work for Follow-up, preserve its provisional novelty status, and never present a reconstructed thought process as the authors' actual motivation.
 
-Choose the primary research topic independently of the RSI relation. Automatic feed classifications are provisional and do not assign an RSI relation. After promotion, rerun the collector so the item is removed from the discovery feed; the UI also hides any ID already present in the curated collection.
+The collector suggests overlapping Evolution Targets and a separate Paper Type when supported by the title. Unknown items remain Unclassified. These provisional tags do not assign an RSI relation, persistent update, Loop Role or evidence of recursive capability. Full-text review assigns variants separately. After promotion rerun collection to remove curated IDs from the discovery feed; the UI also hides IDs already curated.
+
+Run `npm run check:papers`, `npm run test:arxiv`, `npx tsc --noEmit` and `npm run build:pages`. Verify new pages, citations and filters before normal commit/push. A run with no new verified analysis may publish only genuine feed metadata; incomplete analyses remain Awaiting Analysis.
 
 API documentation: https://info.arxiv.org/help/api/user-manual.html
 API terms: https://info.arxiv.org/help/api/tou.html

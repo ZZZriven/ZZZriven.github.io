@@ -4,31 +4,30 @@
 - RSI Paper：https://boran002.github.io/rsi/
 - 鹈鹕骑行：https://boran002.github.io/pelican-cycling.html
 
-RSI Paper 保留原有全屏 DNA 粒子螺旋背景，以暖白底、深灰文字、鼠尾草绿与柔和金色统一导航、论文索引与详情页的视觉设计，收录 46 篇结构化中文论文解析。页面支持全文检索、七方向分类、RSI 关联类型、日期排序和筛选范围内的随机阅读。论文每页 12 篇；查询参数保留筛选条件及页码，可复制当前网址分享。筛选变化回到第一页，越界或无效页码会规范化，翻页后键盘焦点移至结果标题。
+RSI Paper 保留原有全屏 DNA 粒子螺旋背景，以暖白底、深灰文字、鼠尾草绿与柔和金色统一导航、论文索引与详情页的视觉设计，收录 46 篇结构化中文论文解析。页面支持解析全文检索、五个可重叠 Evolution Targets、Paper Type / Loop Role / Evidence / Persistence 独立筛选、日期排序和筛选范围内的随机阅读。arXiv ID 精确匹配对应论文。论文每页 12 篇；查询参数保留筛选条件及页码，可复制当前网址分享。筛选变化回到第一页，越界或无效页码会规范化，翻页后键盘焦点移至结果标题。
 
 ## 分类与来源
 
-主分类：输出修订、记忆与技能、模型与奖励、智能体与代码、搜索与科研、评测与边界、综述与框架。每篇按主要研究问题归档，关键词补充交叉机制。
+Operational Definition：在明确的 System Boundary 内，系统利用 Feedback 持久更新承担后续改进功能的组件，更新后的组件重新参与生成学习经验、提出、评价、选择或整合后续版本。分别判断 Persistent Update、Recursive Mechanism 和 Demonstrated Recursive Gain；结构性反馈不代表已经证明改进能力提高。
 
-关联类型独立标注为 refinement（单次输出修订）、persistent（持久系统优化）、recursive（改进器自修改）、enabling（相关能力与产物优化）或 foundation（综述、理论与评测）。这些主标签区分更新方式和研究用途，不是能力高低排名；混合实验的不同更新范围在解析中分别说明。持久系统优化允许固定优化器，可限于跨尝试保留，跨任务迁移以证据为准。改进器自修改要求明确改变接管后续改进的程序或策略，不能仅凭论文题名或模型与奖励共同训练判定。
+五个 Targets 为 Model Evolution、Prompt & Context Evolution、Memory Evolution、Tool & Skill Evolution、Architecture Evolution。Paper Type 独立区分 Method、Survey、Theory、Benchmark 和 Empirical Analysis。当前 46 篇记录为 52 个 Experiment / Variant；跨轴筛选必须匹配同一个 Variant，避免把不同实验的属性拼接。具体标准见 [TAXONOMY.md](scripts/TAXONOMY.md)。旧分类与 mode 参数仅用于保持历史链接可用。
 
-论文直接在 arXiv 检索和核验，当前 46 篇的题名、首次提交日期、版本和修订日期已用 arXiv 元数据交叉核对。所有论文引用仅指向 arXiv 摘要、PDF 或正文。站内提供三条主题阅读路径。
+所有 46 篇提供十二部分解析，共 552 个章节，包括背景、已有缺口、Idea Reconstruction、Intuition、完整 Pipeline、数学基础、实验逻辑、Takeaways、脆弱假设、一周复现、Counterexample 和 Follow-up。每段区分 Paper Claim、Prior Work、Inference、Hypothesis；所有引用固定来源版本。思路重建不代表作者真实心理过程，教学例子与原文案例分别说明，Follow-up 的新颖性保持待验证。详细写作标准见 [PAPER_READING_GUIDE.md](scripts/PAPER_READING_GUIDE.md)。
 
-`content/papers.json` 每篇包含：
+三份数据按 arXiv ID 对齐：
 
-- `id / title / en / authors`：arXiv ID、中文标题、原题、作者。
-- `date / updated / version`：首次提交和已核实版本。未核实修订信息为 null；“修订排序”对 null 回退首次日期。
-- `category / mode / level / keywords`：主分类、关联类型、改进对象、关键词。
-- `summary / problem / insight / observation / method / result / boundary / relation / outlook`：摘要、Research problem、Insight、Observation、Method、结果、局限、RSI 关联与展望。
-- `feedback / evidence`：反馈来源与证据边界。
-- `reviewedAt / sources`：整理日期和实际阅读来源。每个来源的 `basis` 写明摘要、正文相关章节的核验范围。
+- `content/papers.json`：题名、作者、提交及版本日期、短摘要；旧 category / mode 与短解析字段保留兼容。
+- `content/taxonomy.json`：Paper Type、Topics、逐 Variant 的 Target / Role / Persistence / Recursive Reuse / Evidence、边界、反馈、判定依据与原文。
+- `content/deep-notes.json`：十二项完整解析、四类信息标记、固定版本引用和实际核验范围。
 
-洞察、局限分析、关联分类和未来展望包含编辑判断，页面明确标注。不要把局部实验分数或输出自反馈写成完整 RSI 证据；数据集子集、成本和迁移范围应具体说明。当前为人工维护的精选论文库，不是实时全量索引。
+arXiv Feed 每天 09:00 Asia/Singapore 通过当前任务中的自动化收集；运行依赖电脑和 Codex 在线。Feed 初筛仅提供 Provisional Topics / Paper Type，无法判定时保留 Unclassified。完成原文核验和十二项解析后才进入精选集合。失败不覆盖最近成功的记录；无成功记录时明确显示 Awaiting first successful sync。运行流程见 [ARXIV.md](scripts/ARXIV.md)。
 
 ## 编辑入口
 
 - `components/rsi/library.tsx`：检索、分类导航、方法论和站内阅读路径。
 - `lib/papers.ts`：数据类型、分类说明和组合筛选。
+- `lib/notes.ts`：十二项解析与四类信息 Schema。
+- `components/rsi/methodology.tsx`：RSI 工作定义、分类标准和边界案例。
 - `app/rsi/papers/[id]/page.tsx`：论文详情和静态路由。
 - `app/rsi/rsi.css`：RSI 界面配色及响应式布局。
 - `app/rsi/dna-background.css`：原始 DNA 背景、遮罩及阅读区域对比度。
@@ -45,6 +44,8 @@ RSI Paper 保留原有全屏 DNA 粒子螺旋背景，以暖白底、深灰文�
 ```sh
 npm ci
 npm run dev
+npm run check:papers
+npm run test:arxiv
 npx tsc --noEmit
 npm run lint
 npm run build:pages
@@ -52,7 +53,7 @@ npm run build:pages
 
 GitHub Pages 从 main 的 `/docs` 发布。构建会校验所有预期路由，再更新 docs 并保留 `.nojekyll`。提交源码及构建产物后推送 main 即可发布。生产页面可通过独立网址打开或刷新，无需后端。
 
-验证应覆盖所有论文静态路由、原文及站内链接、桌面/手机排版、分类与关联类型组合、全文检索、无结果重置和 URL 恢复。WebMCP `search_papers` 保留为可选增强，不影响普通浏览器手动使用。
+验证应覆盖所有论文静态路由、原文及站内链接、桌面/手机排版、跨 Variant 分类轴组合、全文检索、无结果重置和 URL 恢复。WebMCP `search_papers` 保留为可选增强，不影响普通浏览器手动使用。
 
 ## 个人主页与素材
 
@@ -64,4 +65,4 @@ GitHub Pages 从 main 的 `/docs` 发布。构建会校验所有预期路由，�
 
 每次界面更新后应重新执行生产静态导出、TypeScript、修改文件的 oxlint，以及上述浏览器检查，再记录当次结果。全仓 lint 的既有问题应与本次修改产生的问题分别记录。生成的 `docs/` 已从源码 lint 中排除。
 
-本轮验证（2026-09-12）：生产导出 48 页、TypeScript、本次修改文件 oxlint 和浏览器检查通过。覆盖全部 46 个详情页、四页论文不重复不遗漏、分页网址恢复、无效页码、筛选与搜索重置、排序、随机范围、键盘焦点、弹窗浅色主题与 Escape、DNA 播放暂停及减少动态效果。320、360、390、600、601、768、850、1024、1440 像素下的列表与详情无水平溢出，无运行时异常或资源失败。全仓先前已知的 20 个 lint 问题未纳入本轮修改。
+本轮验证（2026-09-13）：生产导出 48 页、TypeScript、修改文件 oxlint、22 项 Collector 测试及数据完整性检查通过。浏览器检查覆盖 46 个详情页的十二项解析与引用、52 个 Variant、独立分类轴及同一 Variant 约束、全文与精确 ID 搜索、历史链接和 URL 恢复、四页论文不重复不遗漏、随机范围、键盘焦点、浅色弹窗及 DNA 动画。320–1440 像素的九档宽度无水平溢出。此前全仓已知的 20 个无关 lint 问题未纳入本轮修改。实际 Collector 尝试遇到超时及 HTTP 429，未改写 feed 的成功时间。

@@ -37,13 +37,25 @@ def collect(entries, *, existing=None, curated=None, config=None, **kwargs):
 
 
 class CollectorTests(unittest.TestCase):
+    def test_topics_and_paper_type_are_independent(self):
+        axes = c.classify_axes({"title": "A Survey of Memory and Prompt Optimization", "abstract": "We discuss skill libraries and workflow evolution."})
+        self.assertEqual(axes["paperType"], "Survey")
+        self.assertEqual(set(axes["topics"]), {"Memory Evolution", "Prompt & Context Evolution", "Tool & Skill Evolution", "Architecture Evolution"})
+        self.assertIn("No RSI capability is inferred", axes["classificationReason"])
+
+    def test_unknown_is_not_forced_into_an_evolution_target(self):
+        entry = {"title": "A self-improving agent", "abstract": "We study an emerging research question."}
+        self.assertEqual(c.classify(entry)[0], "Unclassified")
+        self.assertEqual(c.classify_axes(entry)["topics"], [])
+        self.assertEqual(c.classify_axes(entry)["paperType"], "Unclassified")
+
     def test_atom_metadata_and_provisional_classification(self):
         result = collect([entry()])
         item = result["items"][0]
         self.assertEqual(item["id"], "2609.12345")
         self.assertEqual(item["version"], "v1")
         self.assertEqual(item["authors"], ["A. Researcher"])
-        self.assertEqual(item["category"], "Memory & Skills")
+        self.assertEqual(item["category"], "Memory Evolution")
         self.assertTrue(item["provisional"])
         self.assertEqual(item["status"], "awaiting-analysis")
         self.assertEqual(item["arxivUrl"], "https://arxiv.org/abs/2609.12345v1")
