@@ -28,7 +28,7 @@ export type Paper = {
   sources: {label: string; url: string; basis: string}[];
 };
 export const papers = data as Paper[];
-export const siteOrigin = 'https://zzzriven.github.io';
+export const siteOrigin = 'https://boran002.github.io';
 export const collectionUpdated = '2026-09-12';
 export function formatDate(date: string) {return date.replaceAll('-', '.');}
 export function modeLabel(mode: string) {return modes.find(m => m.value === mode)?.label ?? mode;}

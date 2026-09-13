@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 export const metadata: Metadata = {
-  metadataBase: new URL('https://zzzriven.github.io'),
+  metadataBase: new URL('https://boran002.github.io'),
   title: '个人主页 · 内容待填写',
   description: '个人主页，内容待填写。',
   alternates: { canonical: '/' },

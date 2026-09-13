@@ -17,7 +17,7 @@ export function SiteFrame({children}: {children: React.ReactNode}) {
       <nav className="rsi-nav" aria-label="站点导航"><a href="/rsi/#library">论文</a><a href="/rsi/#methodology">分类方法</a><a href="/rsi/#resources">阅读路径</a><button onClick={() => setAbout(true)}>关于</button><a href="/" className="personal-home-link">个人主页 <ArrowUpRight size={14}/></a></nav>
     </header>
     {children}
-    <footer className="rsi-footer"><div><span className="footer-wordmark">RSI Paper</span><p>Read. Reflect. Evolve.</p></div><div className="rsi-credit"><span>由 <a href="https://github.com/ZZZriven">{siteOwner.name}</a> 创建与维护</span><a href={'mailto:' + siteOwner.email}>{siteOwner.email}</a><a href="https://github.com/ZZZriven/ZZZriven.github.io">网站源码 <ArrowUpRight size={13}/></a></div></footer>
+    <footer className="rsi-footer"><div><span className="footer-wordmark">RSI Paper</span><p>Read. Reflect. Evolve.</p></div><div className="rsi-credit"><span>由 <a href="https://github.com/BORAN002">{siteOwner.name}</a> 创建与维护</span><a href={'mailto:' + siteOwner.email}>{siteOwner.email}</a><a href="https://github.com/BORAN002/boran002.github.io">网站源码 <ArrowUpRight size={13}/></a></div></footer>
     <Dialog open={about} onOpenChange={setAbout}><DialogContent className="rsi-dialog" showCloseButton={false}>
       <DialogClose className="dialog-close" aria-label="关闭关于本站"><X size={20}/></DialogClose>
       <p className="overline">ABOUT RSI PAPER</p>

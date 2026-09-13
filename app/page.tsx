@@ -5,7 +5,7 @@ export default function Home() {
   return <div className="personal-home">
     <PelicanBackground/>
     <main className="personal-shell">
-    <div className="personal-top"><span>PERSONAL WEBSITE</span><span>ZZZriven.github.io</span></div>
+    <div className="personal-top"><span>PERSONAL WEBSITE</span><span>boran002.github.io</span></div>
     <div className="personal-body">
       <p className="overline">UNDER CONSTRUCTION</p>
       <h1>个人主页<span>。</span></h1>
